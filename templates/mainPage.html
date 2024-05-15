@@ -17,4 +17,17 @@
     <h2>Our Mission</h2>
     <p>Our mission is to provide an engaging experience for discovering, purchasing, and reviewing books.</p>
 
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-message" class="alert alert-{{ messages[0][0] }}" role="alert">
+                {{ messages[0][1] }}
+            </div>
+            <script>
+                window.onload = function() {
+                    // Display the alert dialog
+                    alert('{{ messages[0][1] }}');
+                };
+            </script>
+        {% endif %}
+    {% endwith %}
+{% endblock %}
