@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Requests</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Find Book Requests</h1>
+    <form action="/findRequests" method="GET">
+        <label for="title">Book Title:</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author"><br>
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre"><br>
+        <button type="submit">Search</button>
+    </form>
+    <div id="recent-requests">
+        <h2>Recent Requests</h2>
+        <!-- Recent requests will be displayed here -->
+    </div>
+</body>
+</html>
