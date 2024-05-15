@@ -25,12 +25,15 @@ Comprehensive catalog of books with detailed information including title, author
 Ability to search for books based on genre.
 
 Book Reviews:
-Users can rate and review books they have read.
+Users can rate and review books they have read. Once they have signed in.
 Option to sort books by highest rated to lowest rated.
 
 Book searching:
 Display of the latest additions to the bookstore's collection.
 Users can easily discover and explore new releases.
+
+About us:
+Display of the four members who created the page. Faviorite book and a little information.
 
 User Profile:
 Users have personalized profiles where they can view their activity, reviews, favorites.
