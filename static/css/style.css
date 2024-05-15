@@ -60,3 +60,44 @@ form button {
 form button:hover {
     background-color: #004494;
 }
+
+
+/* Carousel index.html css */
+.ReccomendedBooksCarousel{
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    
+   
+}
+.ReccomendedBooksCarousel img{
+    width: 30%;
+    display: none;
+    margin: 0 auto;
+    
+
+}
+img.displaySlide{
+    display: block;
+    animation-name: fade;
+    animation-duration: 2s;
+}
+.ReccomendedBooksCarousel button{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    padding: 9px 12px;
+    background-color: hsla(122, 74%, 19%, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.prevCarousel{
+    left: 170px;
+}
+.nextCarousel{
+    right: 170px;
+
+}

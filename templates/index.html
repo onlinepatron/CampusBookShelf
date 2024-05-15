@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +12,47 @@
     <title>CampusBookShelf</title>
 </head>
 <body>
-    <h1>Welcome to CampusBookShelf</h1>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+    <h1>University Students Faviroute Way To Find Books!</h1>
+    
+    <h2> What's Popular? </h2>
+    <p> Browse the reccomended reads for Univeristy Students from Global Admissions!</p>
+    
+    <br>
+    <div class="ReccomendedBooksCarousel">
+        <div class="ReccomendedBooks">
+            <img class="Rec" src="static/images/GA12DefiningDecade.jpeg" alt="The Defining Decade: Why your twenties matter and how to make the most of them now: Meg Jay">
+            <img class="Rec" src="static/images/GA12PhysicsOfTheImpossible.jpeg" alt="Physics of the Impossible: A Scientific Exploration into the World of Phasers, Force Fields, Teleportation, and Time Travel: Michio Kaku">
+            <img class="Rec" src="static/images/GA12TheGoldfinch.jpeg" alt="The Goldfinch: Donna Tartt">
+            <img class="Rec" src="static/images/GA12BornACrime.jpeg" alt="It's Trevor Noah: Born a Crime: Trevor Noah">
+            <img class="Rec" src="static/images/GA12PsychofMoney.jpeg" alt="The Psychology of Money: Timeless lessons on wealth, greed, and happiness:Morgan Housel">
+            <img class="Rec" src="static/images/GA12Sapiens.jpeg" alt="Sapiens: A Brief History of Humankind:Yuval Noah Harari ">
+            <img class="Rec" src="static/images/GA12SecretHistory.jpeg" alt="The Secret History: Donna Tartt ">
+            <img class="Rec" src="static/images/GA12Wallflower.jpeg" alt="The Perks of Being a Wallflower:Stephen Chbosky">
+            <img class="Rec" src="static/images/GA12Watchmen.jpeg" alt="Watchmen: Alan Moore, Dave Gibbons">
+        </div>
+        <button class="prevCarousel" onclick="prevSlide()">&#10094</button>
+        <button class="nextCarousel" onclick="nextSlide()">&#10095</button>
+    </div>
+
+    <div class="main__find">
+        <p> Not what you're looking for? You can requests books here: </p>
+        <button class="main__btn">
+            <a href="/FindBooks.html">Request a Book</a>
+        </button>
+        
+        </div>
+        <div class="main__content2">
+            <h3> Our Mission </h3>
+            <p> HD-Books Aim to provide users with an application for discovering, purchasing, and reviewing books </p>
+            <p> Have books to spare? See what people are requesting: </p>
+            <button class="main__btn">
+                <a href="/SellBooks.html">Find Requests</a>
+            </button>
+
+        </div>
+        <script src="static/js/index.js"></script>
+
 </body>
 </html>
+
+{% endblock %}
