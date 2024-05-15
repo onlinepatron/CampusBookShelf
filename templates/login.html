@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Login</h1>
-    <form action="{{ url_for('auth.login') }}" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br>
-        <button type="submit">Login</button>
-    </form>
-    <a href="{{ url_for('auth.register') }}">Don't have an account? Register here.</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/createRequest">Create Request</a></li>
+            <li><a href="/findRequests">Find Requests</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <h1>Recommended Books</h1>
+    <div id="carousel">
+        <!-- Carousel for recommended books -->
+    </div>
+    <h2>Popular Books</h2>
+    <div id="popular-books">
+        <!-- Section for popular books -->
+    </div>
+    <h2>Our Mission</h2>
+    <p>Our mission is to provide an engaging experience for discovering, purchasing, and reviewing books.</p>
+{% endblock %}
+
