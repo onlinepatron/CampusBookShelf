@@ -20,7 +20,7 @@ def login():
             print("Authentication failed.")  # Debug statement
     return render_template('login.html')
 
-@auth_bp.route('/register', methods=['GET', 'POST'])
+@auth_bp.route('/sign-up', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
