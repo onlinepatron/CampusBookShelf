@@ -1,30 +1,34 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Request</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Create a Book Request</h1>
+
+{% block title %}Create Request{% endblock %}
+
+{% block content %}
+    <h2>Create a Book Request</h2>
     <form action="/createRequest" method="POST">
-        <label for="title">Book Title:</label>
-        <input type="text" id="title" name="title" required><br>
-        <label for="author">Author:</label>
-        <input type="text" id="author" name="author" required><br>
-        <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="genre" required><br>
-        <label for="message">Message:</label>
-        <textarea id="message" name="message" required></textarea><br>
-        <label for="type">Book Type:</label>
-        <select id="type" name="type" required>
-            <option value="hard copy">Hard Copy</option>
-            <option value="PDF">PDF</option>
-            <option value="any">Any</option>
-        </select><br>
-        <button type="submit">Submit Request</button>
+        <div class="form-group">
+            <label for="title">Book Title:</label>
+            <input type="text" id="title" name="title" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" required class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="type">Book Type:</label>
+            <select id="type" name="type" required class="form-control">
+                <option value="hard copy">Hard Copy</option>
+                <option value="PDF">PDF</option>
+                <option value="any">Any</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Request</button>
     </form>
-</body>
-</html>
+{% endblock %}

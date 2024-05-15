@@ -1,26 +1,26 @@
 {% extends "base.html" %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Requests</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Find Book Requests</h1>
-    <form action="/findRequests" method="GET">
-        <label for="title">Book Title:</label>
-        <input type="text" id="title" name="title"><br>
-        <label for="author">Author:</label>
-        <input type="text" id="author" name="author"><br>
-        <label for="genre">Genre:</label>
-        <input type="text" id="genre" name="genre"><br>
-        <button type="submit">Search</button>
+
+{% block title %}Find Requests{% endblock %}
+
+{% block content %}
+    <h2>Find Book Requests</h2>
+    <form action="/findRequests" method="GET" class="mb-4">
+        <div class="form-group">
+            <label for="title">Book Title:</label>
+            <input type="text" id="title" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
     <div id="recent-requests">
-        <h2>Recent Requests</h2>
-        <!-- Recent requests will be displayed here -->
+        <h3>Recent Requests</h3>
+        <!-- Placeholder for recent requests; dynamic content goes here -->
     </div>
-</body>
-</html>
+{% endblock %}

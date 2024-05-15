@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app import db
 from models import Book
 
@@ -17,14 +17,15 @@ def get_book(book_id):
 @book_bp.route('/add_book', methods=['GET', 'POST'])
 def add_book():
     if request.method == 'POST':
-        title = request.form['title']
-        author = request.form['author']
-        genre = request.form['genre']
-        synopsis = request.form['synopsis']
-        image_url = request.form['image_url']
+        title = request.form.get('title')
+        author = request.form.get('author')
+        genre = request.form.get('genre')
+        synopsis = request.form.get('synopsis', '')
+        image_url = request.form.get('image_url', '')
         new_book = Book(title=title, author=author, genre=genre, synopsis=synopsis, image_url=image_url)
         db.session.add(new_book)
         db.session.commit()
+        flash('Book added successfully!', 'success')
         return redirect(url_for('book.get_books'))
     return render_template('add_book.html')
 
@@ -32,12 +33,13 @@ def add_book():
 def update_book(book_id):
     book = Book.query.get_or_404(book_id)
     if request.method == 'POST':
-        book.title = request.form['title']
-        book.author = request.form['author']
-        book.genre = request.form['genre']
-        book.synopsis = request.form['synopsis']
-        book.image_url = request.form['image_url']
+        book.title = request.form.get('title')
+        book.author = request.form.get('author')
+        book.genre = request.form.get('genre')
+        book.synopsis = request.form.get('synopsis', '')
+        book.image_url = request.form.get('image_url', '')
         db.session.commit()
+        flash('Book updated successfully!', 'success')
         return redirect(url_for('book.get_book', book_id=book.id))
     return render_template('update_book.html', book=book)
 
@@ -46,4 +48,28 @@ def delete_book(book_id):
     book = Book.query.get_or_404(book_id)
     db.session.delete(book)
     db.session.commit()
+    flash('Book deleted successfully!', 'success')
     return redirect(url_for('book.get_books'))
+
+@book_bp.route('/createRequest', methods=['GET', 'POST'])
+def create_request():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        author = request.form.get('author')
+        genre = request.form.get('genre')
+        message = request.form.get('message', '')
+        book_type = request.form.get('type', 'PDF')
+
+        new_book = Book(title=title, author=author, genre=genre, synopsis=message)
+        db.session.add(new_book)
+        db.session.commit()
+
+        flash('Your book request has been successfully submitted!', 'success')
+        return redirect(url_for('index'))  # Redirect to the home page
+
+    return render_template('createRequest.html')
+
+@book_bp.route('/findRequests', methods=['GET'])
+def find_requests():
+    requests = Book.query.all()  # Modify this as necessary to fit the purpose of finding requests
+    return render_template('findRequests.html', requests=requests)
