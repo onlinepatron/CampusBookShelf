@@ -22,8 +22,14 @@ def login():
 def signup():
     if request.method == 'POST':
         username = request.form.get('username')
+        email = request.form.get('email')
         password = request.form.get('password')
-        user = User(username=username)
+        confirm_password = request.form.get('confirmPassword')
+
+        if password != confirm_password:
+            return render_template('signup.html', error='Passwords do not match')
+
+        user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
