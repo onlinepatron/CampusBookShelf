@@ -20,12 +20,12 @@ def get_reviews(book_id):
 
 @review_bp.route('/review/<int:review_id>', methods=['GET'])
 def get_review_by_id(review_id):
-    review = Review.query.get_or_404(review_id)
+    review = db.session.get(Review, review_id)  # Updated line
     return jsonify({'id': review.id, 'user_id': review.user_id, 'book_id': review.book_id, 'text': review.text, 'rating': review.rating})
 
 @review_bp.route('/review/<int:review_id>', methods=['DELETE'])
 def delete_review(review_id):
-    review = Review.query.get(review_id)
+    review = db.session.get(Review, review_id)  # Updated line
     if review is None:
         return jsonify({'error': 'Review not found'}), 404
     db.session.delete(review)

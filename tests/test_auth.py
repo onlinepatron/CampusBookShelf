@@ -1,4 +1,3 @@
-from flask import current_app as app
 import unittest
 from app import create_app, db
 from models import User

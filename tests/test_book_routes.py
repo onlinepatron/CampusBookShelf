@@ -35,7 +35,7 @@ class TestBookRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 302)  # Redirect to books list
 
         with self.app.app_context():
-            book = Book.query.filter_by(title='New Book').first()
+            book = db.session.get(Book, 1)  # Updated line
             self.assertIsNotNone(book)
             self.assertEqual(book.author, 'New Author')
 
@@ -63,7 +63,7 @@ class TestBookRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 302)  # Redirect to the updated book
 
         with self.app.app_context():
-            updated_book = Book.query.get(book_id)
+            updated_book = db.session.get(Book, book_id)  # Updated line
             self.assertEqual(updated_book.title, 'Updated Book')
             self.assertEqual(updated_book.author, 'Updated Author')
 
@@ -78,7 +78,7 @@ class TestBookRoutes(unittest.TestCase):
         self.assertEqual(response.status_code, 302)  # Redirect to books list
 
         with self.app.app_context():
-            deleted_book = Book.query.get(book_id)
+            deleted_book = db.session.get(Book, book_id)  # Updated line
             self.assertIsNone(deleted_book)
 
 if __name__ == '__main__':
