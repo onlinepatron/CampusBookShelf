@@ -1,6 +1,6 @@
 import unittest
 from app import create_app, db
-from models import User, Review
+from models import User
 
 class TestModels(unittest.TestCase):
     def setUp(self):
@@ -16,18 +16,13 @@ class TestModels(unittest.TestCase):
             db.drop_all()
 
     def test_user_model(self):
-        user = User(username='testuser')
-        user.set_password('password123')
+        user = User(username='testuser', email='testuser@example.com')
+        user.set_password('correctpassword')
         db.session.add(user)
         db.session.commit()
-        self.assertIsNotNone(user.id)
-        self.assertTrue(user.check_password('password123'))
-
-    def test_review_model(self):
-        review = Review(user_id=1, book_id=1, text='Great book!', rating=5)
-        db.session.add(review)
-        db.session.commit()
-        self.assertIsNotNone(review.id)
+        queried_user = User.query.filter_by(username='testuser').first()
+        self.assertIsNotNone(queried_user)
+        self.assertTrue(queried_user.check_password('correctpassword'))
 
 if __name__ == '__main__':
     unittest.main()

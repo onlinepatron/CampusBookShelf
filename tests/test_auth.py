@@ -11,7 +11,7 @@ class TestAuth(unittest.TestCase):
         with self.app.app_context():
             db.create_all()
             # Create a test user
-            test_user = User(username='testuser')
+            test_user = User(username='testuser', email='testuser@example.com')
             test_user.set_password('correctpassword')
             db.session.add(test_user)
             db.session.commit()
