@@ -35,6 +35,10 @@ def create_app():
     def about():
         return render_template('aboutUs.html')
 
+    @app.route('/profile')
+    def profile():
+        return render_template('aboutUs.html')
+
     return app
 
 if __name__ == "__main__":
