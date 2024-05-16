@@ -1,9 +1,8 @@
-from flask import current_app as app
 import unittest
 from app import create_app, db
-from models import User
+from models import Book
 
-class TestAuth(unittest.TestCase):
+class TestBookRoutes(unittest.TestCase):
     def setUp(self):
         self.app = create_app()
         self.app.config['TESTING'] = True
@@ -11,36 +10,76 @@ class TestAuth(unittest.TestCase):
         self.client = self.app.test_client()
         with self.app.app_context():
             db.create_all()
-            # Create a test user
-            test_user = User(username='testuser')
-            test_user.set_password('correctpassword')
-            db.session.add(test_user)
-            db.session.commit()
 
     def tearDown(self):
         with self.app.app_context():
             db.drop_all()
 
-    def test_login_success(self):
-        response = self.client.post('/login', data=dict(username='testuser', password='correctpassword'))
-        self.assertEqual(response.status_code, 302)  # Redirect to the main page
-        self.assertIn('/main', response.location)
+    def test_get_books(self):
+        with self.app.app_context():
+            book1 = Book(title='Book1', author='Author1', genre='Genre1', synopsis='Synopsis1')
+            book2 = Book(title='Book2', author='Author2', genre='Genre2', synopsis='Synopsis2')
+            db.session.add(book1)
+            db.session.add(book2)
+            db.session.commit()
 
-    def test_login_failure(self):
-        response = self.client.post('/login', data=dict(username='testuser', password='wrongpassword'))
-        self.assertEqual(response.status_code, 200)  # Stay on the login page
-        self.assertIn(b'Invalid username or password', response.data)
+        response = self.client.get('/books')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Book1', response.data)
+        self.assertIn(b'Book2', response.data)
 
-    def test_signup(self):
-        response = self.client.post('/sign-up', data=dict(username='newuser', password='newpassword'))
-        self.assertEqual(response.status_code, 302)  # Redirect to the main page
-        self.assertIn('/main', response.location)
+    def test_add_book(self):
+        response = self.client.post('/add_book', data=dict(
+            title='New Book', author='New Author', genre='New Genre', synopsis='New Synopsis', image_url=''
+        ))
+        self.assertEqual(response.status_code, 302)  # Redirect to books list
 
-    def test_logout(self):
-        self.client.post('/login', data=dict(username='testuser', password='correctpassword'))
-        response = self.client.get('/logout')
-        self.assertEqual(response.status_code, 302)  # Redirect to the login page
-        self.assertIn('/login', response.location)
+        with self.app.app_context():
+            book = Book.query.filter_by(title='New Book').first()
+            self.assertIsNotNone(book)
+            self.assertEqual(book.author, 'New Author')
+
+    def test_get_book(self):
+        with self.app.app_context():
+            book = Book(title='Book1', author='Author1', genre='Genre1', synopsis='Synopsis1')
+            db.session.add(book)
+            db.session.commit()
+            book_id = book.id
+
+        response = self.client.get(f'/book/{book_id}')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Book1', response.data)
+
+    def test_update_book(self):
+        with self.app.app_context():
+            book = Book(title='Book1', author='Author1', genre='Genre1', synopsis='Synopsis1')
+            db.session.add(book)
+            db.session.commit()
+            book_id = book.id
+
+        response = self.client.post(f'/update_book/{book_id}', data=dict(
+            title='Updated Book', author='Updated Author', genre='Updated Genre', synopsis='Updated Synopsis', image_url=''
+        ))
+        self.assertEqual(response.status_code, 302)  # Redirect to the updated book
+
+        with self.app.app_context():
+            updated_book = Book.query.get(book_id)
+            self.assertEqual(updated_book.title, 'Updated Book')
+            self.assertEqual(updated_book.author, 'Updated Author')
+
+    def test_delete_book(self):
+        with self.app.app_context():
+            book = Book(title='Book1', author='Author1', genre='Genre1', synopsis='Synopsis1')
+            db.session.add(book)
+            db.session.commit()
+            book_id = book.id
+
+        response = self.client.post(f'/delete_book/{book_id}')
+        self.assertEqual(response.status_code, 302)  # Redirect to books list
+
+        with self.app.app_context():
+            deleted_book = Book.query.get(book_id)
+            self.assertIsNone(deleted_book)
 
 if __name__ == '__main__':
     unittest.main()
