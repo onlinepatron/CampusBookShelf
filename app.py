@@ -31,6 +31,10 @@ def create_app():
     def main():
         return render_template('mainPage.html')
 
+    @app.route('/about-us')
+    def about():
+        return render_template('aboutUs.html')
+
     return app
 
 if __name__ == "__main__":
