@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app import db
-from models import Book
+from models import Book, Review
+from flask_login import login_required, current_user
 
 book_bp = Blueprint('book', __name__)
 
@@ -50,3 +51,27 @@ def delete_book(book_id):
     db.session.commit()
     flash('Book deleted successfully!', 'success')
     return redirect(url_for('book.get_books'))
+
+@book_bp.route('/rate-books', methods=['GET', 'POST'])
+@login_required
+def rate_books():
+    if request.method == 'POST':
+        book_id = request.form.get('book_id')
+        rating = request.form.get('rating')
+        review_text = request.form.get('review')
+
+        # Ensure book and user exist
+        book = Book.query.get(book_id)
+        if not book:
+            flash('Book not found!', 'danger')
+            return redirect(url_for('book.rate_books'))
+
+        # Create and save the review
+        review = Review(user_id=current_user.id, book_id=book.id, rating=rating, text=review_text)
+        db.session.add(review)
+        db.session.commit()
+        flash('Your review has been submitted!', 'success')
+        return redirect(url_for('book.get_books'))
+
+    books = Book.query.all()
+    return render_template('rateBooks.html', books=books)
