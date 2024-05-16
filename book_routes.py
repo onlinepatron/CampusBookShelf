@@ -53,6 +53,13 @@ def delete_book(book_id):
 
 @book_bp.route('/createRequest', methods=['GET', 'POST'])
 def create_request():
+    title = request.args.get('title')
+    author = request.args.get('author')
+    genre = request.args.get('genre')
+    if title and author and genre:
+        
+        return render_template('createRequest.html', title=title, author=author, genre=genre)
+
     if request.method == 'POST':
         title = request.form.get('title')
         author = request.form.get('author')
