@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from app import db
-from models import Book
+from models import Book, Review
+from flask_login import login_required, current_user
 
 book_bp = Blueprint('book', __name__)
 
@@ -11,7 +12,7 @@ def get_books():
 
 @book_bp.route('/book/<int:book_id>')
 def get_book(book_id):
-    book = Book.query.get_or_404(book_id)
+    book = db.session.get(Book, book_id)  # Updated line
     return render_template('book.html', book=book)
 
 @book_bp.route('/add_book', methods=['GET', 'POST'])
@@ -31,7 +32,7 @@ def add_book():
 
 @book_bp.route('/update_book/<int:book_id>', methods=['GET', 'POST'])
 def update_book(book_id):
-    book = Book.query.get_or_404(book_id)
+    book = db.session.get(Book, book_id)  # Updated line
     if request.method == 'POST':
         book.title = request.form.get('title')
         book.author = request.form.get('author')
@@ -45,31 +46,32 @@ def update_book(book_id):
 
 @book_bp.route('/delete_book/<int:book_id>', methods=['POST'])
 def delete_book(book_id):
-    book = Book.query.get_or_404(book_id)
+    book = db.session.get(Book, book_id)  # Updated line
     db.session.delete(book)
     db.session.commit()
     flash('Book deleted successfully!', 'success')
     return redirect(url_for('book.get_books'))
 
-@book_bp.route('/createRequest', methods=['GET', 'POST'])
-def create_request():
+@book_bp.route('/rate-books', methods=['GET', 'POST'])
+@login_required
+def rate_books():
     if request.method == 'POST':
-        title = request.form.get('title')
-        author = request.form.get('author')
-        genre = request.form.get('genre')
-        message = request.form.get('message', '')
-        book_type = request.form.get('type', 'PDF')
+        book_id = request.form.get('book_id')
+        rating = request.form.get('rating')
+        review_text = request.form.get('review')
 
-        new_book = Book(title=title, author=author, genre=genre, synopsis=message)
-        db.session.add(new_book)
+        # Ensure book and user exist
+        book = Book.query.get(book_id)
+        if not book:
+            flash('Book not found!', 'danger')
+            return redirect(url_for('book.rate_books'))
+
+        # Create and save the review
+        review = Review(user_id=current_user.id, book_id=book.id, rating=rating, text=review_text)
+        db.session.add(review)
         db.session.commit()
+        flash('Your review has been submitted!', 'success')
+        return redirect(url_for('book.get_books'))
 
-        flash('Your book request has been successfully submitted!', 'success')
-        return redirect(url_for('index'))  # Redirect to the home page
-
-    return render_template('createRequest.html')
-
-@book_bp.route('/findRequests', methods=['GET'])
-def find_requests():
-    requests = Book.query.all()  # Modify this as necessary to fit the purpose of finding requests
-    return render_template('findRequests.html', requests=requests)
+    books = Book.query.all()
+    return render_template('rateBooks.html', books=books)

@@ -15,12 +15,17 @@ def add_review(book_id):
 @review_bp.route('/book/<int:book_id>/reviews', methods=['GET'])
 def get_reviews(book_id):
     reviews = Review.query.filter_by(book_id=book_id).all()
-    reviews_list = [{'id': review.id, 'user_id': review.user_id, 'book_id': review.book_id, 'text': review.text, 'rating': review.rating, 'timestamp': review.timestamp} for review in reviews]
+    reviews_list = [{'id': review.id, 'user_id': review.user_id, 'book_id': review.book_id, 'text': review.text, 'rating': review.rating} for review in reviews]
     return jsonify(reviews_list)
+
+@review_bp.route('/review/<int:review_id>', methods=['GET'])
+def get_review_by_id(review_id):
+    review = db.session.get(Review, review_id)  # Updated line
+    return jsonify({'id': review.id, 'user_id': review.user_id, 'book_id': review.book_id, 'text': review.text, 'rating': review.rating})
 
 @review_bp.route('/review/<int:review_id>', methods=['DELETE'])
 def delete_review(review_id):
-    review = Review.query.get(review_id)
+    review = db.session.get(Review, review_id)  # Updated line
     if review is None:
         return jsonify({'error': 'Review not found'}), 404
     db.session.delete(review)

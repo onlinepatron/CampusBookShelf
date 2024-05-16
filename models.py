@@ -5,6 +5,7 @@ from extensions import db, login_manager
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)  # Add this line
     password_hash = db.Column(db.String(256), nullable=False)
 
     def set_password(self, password):
@@ -15,7 +16,7 @@ class User(db.Model, UserMixin):
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(int(user_id))
+    return db.session.get(User, int(user_id))
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
