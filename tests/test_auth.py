@@ -31,7 +31,12 @@ class TestAuth(unittest.TestCase):
         self.assertIn(b'Invalid username or password', response.data)
 
     def test_signup(self):
-        response = self.client.post('/sign-up', data=dict(username='newuser', password='newpassword'))
+        response = self.client.post('/sign-up', data=dict(
+            username='newuser',
+            email='newuser@example.com',
+            password='newpassword',
+            confirmPassword='newpassword'
+        ))
         self.assertEqual(response.status_code, 302)  # Redirect to the main page
         self.assertIn('/main', response.location)
 
