@@ -55,7 +55,9 @@ Instructions on how to launch the application
 # Running the Application 
 Instructions for how to run the tests for the application 
 
+# Run Test Files
 
+Use "python -m unittest discover -s tests" to run the series of tests on the backend file
 
 
 
