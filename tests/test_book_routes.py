@@ -1,6 +1,7 @@
 import unittest
 from app import create_app, db
 from models import User, Book, Review
+import time
 
 class TestBookRoutes(unittest.TestCase):
     def setUp(self):
@@ -82,6 +83,22 @@ class TestBookRoutes(unittest.TestCase):
 
     def test_rate_books(self):
         with self.app.test_client() as client:
+            # Create a test user with a unique username and email
+            timestamp = int(time.time())
+            test_username = f"testuser{timestamp}"
+            test_email = f"testuser{timestamp}@example.com"
+            test_user = User(username=test_username, email=test_email)
+            test_user.set_password('testpassword')
+            db.session.add(test_user)
+            db.session.commit()
+
+            # Log in the user
+            response = client.post('/login', data=dict(
+                username=test_username,
+                password='testpassword'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
             book = Book(title='Test Book', author='Test Author', genre='Test Genre')
             db.session.add(book)
             db.session.commit()
