@@ -2,24 +2,84 @@
 
 {% block content %}
 
-  <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/createRequest">Create Request</a></li>
-            <li><a href="/findRequests">Find Requests</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
-    </nav>
-    <h1>Recommended Books</h1>
-    <div id="carousel">
-        <!-- Carousel for recommended books -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusBookShelf</title>
+</head>
+<body>
+    <h1>Welcome to CampusBookShelf</h1>
+    <p>At CampusBookShelf we're passionate about improving students' experiences with finding and sharing books by providing easy access to all kinds of books, from bestsellers to university textbooks. We believe everyone deserves access to books, and with this platform we hope to improve the issue of overpriced and inaccessible books. Join our mission to make the of books more accessible and enjoyable for all by contributing to the Campus Bookshelf! </p>
+    <h2> Recommended Books </h2>
+    <p> Request <a href= "https://www.globaladmissions.com/blog/12-books-every-university-student-should-read-in-2024/"> Global Admissions</a> recommended books for University Students: </p>
+    
+    <br>
+    <div class="RecommendedBooksCarousel">
+        <div class="RecommendedBooks">
+            <div class="ReccomendedBooksCarousel">
+                <div class="ReccomendedBooks">
+                    <a href="/createRequest?title=The%20Defining%20Decade&author=Meg%20Jay&genre=Self%20Help">
+                    <img class="Rec" src="static/images/GA12DefiningDecade.jpeg" alt="The Defining Decade: Why your twenties matter and how to make the most of them now: Meg Jay">
+                    </a>
+                    <a href="/createRequest?title=Physics%20of%20the%20Impossible&author=Michio%20Kaku&genre=Science%20Fiction">
+                    <img class="Rec" src="static/images/GA12PhysicsOfTheImpossible.jpeg" alt="Physics of the Impossible: A Scientific Exploration into the World of Phasers, Force Fields, Teleportation, and Time Travel: Michio Kaku">
+                    </a>
+                    <a href="/createRequest?title=The%20Goldfinch&author=Donna%20Tartt&genre=Fiction">
+                    <img class="Rec" src="static/images/GA12TheGoldfinch.jpeg" alt="The Goldfinch: Donna Tartt">
+                    </a>
+                    <a href="/createRequest?title=It's%20Trevor%20Noah:%20Born%20a%20Crime&author=Trevor%20Noah&genre=Memoir">
+                    <img class="Rec" src="static/images/GA12BornACrime.jpeg" alt="It's Trevor Noah: Born a Crime: Trevor Noah">
+                    </a>
+                    <a href="/createRequest?title=The%20Psychology%20of%20Money&author=Morgan%20Housel&genre=Finance">
+                    <img class="Rec" src="static/images/GA12PsychofMoney.jpeg" alt="The Psychology of Money: Timeless lessons on wealth, greed, and happiness:Morgan Housel">
+                    </a>
+                    <a href="/createRequest?title=Sapiens&author=Yuval%20Noah%20Harari&genre=Non-fiction">
+                    <img class="Rec" src="static/images/GA12Sapiens.jpeg" alt="Sapiens: A Brief History of Humankind:Yuval Noah Harari ">
+                    </a>
+                    <a href="/createRequest?title=The%20Secret%20History&author=Donna%20Tartt&genre=Fiction">
+                    <img class="Rec" src="static/images/GA12SecretHistory.jpeg" alt="The Secret History: Donna Tartt ">
+                    </a>
+                    <a href="/createRequest?title=The%20Perks%20of%20Being%20a%20Wallflower&author=Stephen%20Chbosky&genre=Young%20Adult">
+                    <img class="Rec" src="static/images/GA12Wallflower.jpeg" alt="The Perks of Being a Wallflower:Stephen Chbosky">
+                    </a>
+                    <a href="/createRequest?title=Watchmen&author=Alan%20Moore,%20Dave%20Gibbons&genre=Graphic%20Novel">
+                    <img class="Rec" src="static/images/GA12Watchmen.jpeg" alt="Watchmen: Alan Moore, Dave Gibbons">
+                    </a>
+        </div>
+        <button class="prevCarousel" onclick="prevSlide()">&#10094;</button>
+        <button class="nextCarousel" onclick="nextSlide()">&#10095;</button>
     </div>
-    <h2>Popular Books</h2>
-    <div id="popular-books">
-        <!-- Section for popular books -->
+    <br>
+    <br>
+    <div class="main__find">
+        <p> Not what you're looking for? Our bookshelf is endless. </p>
+        <a href="/createRequest" class="SmallButton">Request a Book</a>
     </div>
-    <h2>Our Mission</h2>
-    <p>Our mission is to provide an engaging experience for discovering, purchasing, and reviewing books.</p>
+    <br>
+    <br>
+    <div class="main__content2">
+        <h2> Share your book </h2>
+        <p> If your bookshelf is full and you're looking for a sustainable way to share your books, you can browse requested books. </p>
+
+        <a href="/findRequests" class="SmallButton">Find Requests</a>  
+    </div>
+    <br>
+    <br>
+    <div class="main__review">
+        <h2> Share your thoughts </h2>
+        <p> LOVE or HATE a book? Leave your thoughts here so that future readers can get a heads up! </p>
+        <a href="/findRequests" class="SmallButton">Leave a Review</a>  
+    </div>
+
+
+
+
+    <script src="static/js/index.js"></script>
+</body>
+</html>
+
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
