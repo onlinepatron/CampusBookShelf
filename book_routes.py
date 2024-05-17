@@ -59,7 +59,21 @@ def create_request():
     genre = request.args.get('genre')
     if title and author and genre:
         return render_template('createRequest.html', title=title, author=author, genre=genre)
+    if request.method == 'POST':
+        title = request.form.get('title')
+        author = request.form.get('author')
+        genre = request.form.get('genre')
+        message = request.form.get('message', '')
+        book_type = request.form.get('type', 'PDF')
 
+        new_book = Book(title=title, author=author, genre=genre, synopsis=message)
+        db.session.add(new_book)
+        db.session.commit()
+
+        flash('Your book request has been successfully submitted!', 'success')
+        return redirect(url_for('index'))  # Redirect to the home page
+
+    return render_template('createRequest.html')    
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
 def rate_books():
