@@ -37,25 +37,40 @@ nav ul li a {
 }
 
 .mainGreeting {
-    background-color: #4b9149;
-    color: white;
-    text-align: center; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
+    position: relative;
+    width: 100%;
+    max-width: 2000px; 
+    margin: 0 auto; 
+    overflow: hidden;
+    height: 210px;
 }
+
+.bannerImage {
+    display: block;
+    width: 100%;
+} 
 
 .mainText-container {
-    display: flex;
-    flex-direction: column; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff; /* Text color */
 }
 
-.mainText-container h1,
-.mainText-container p {
+.mainText-container h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif; 
+    font-weight: bold;
+    margin-bottom: 10px;
     color: white;
-    margin: 0; 
 }
+
+.mainText-container p {
+    font-size: 1em;
+    margin: 0;
+}
+
 
 /* Footer  */
 
