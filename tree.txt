@@ -2,17 +2,12 @@
 ├── README.md
 ├── __pycache__
 │   ├── app.cpython-310.pyc
-│   ├── app.cpython-311.pyc
 │   ├── auth.cpython-310.pyc
-│   ├── auth.cpython-311.pyc
 │   ├── book_routes.cpython-310.pyc
-│   ├── book_routes.cpython-311.pyc
+│   ├── db.cpython-310.pyc
 │   ├── extensions.cpython-310.pyc
-│   ├── extensions.cpython-311.pyc
 │   ├── models.cpython-310.pyc
-│   ├── models.cpython-311.pyc
-│   ├── review_routes.cpython-310.pyc
-│   └── review_routes.cpython-311.pyc
+│   └── review_routes.cpython-310.pyc
 ├── app.py
 ├── auth.py
 ├── book_routes.py
@@ -28,9 +23,9 @@
 │   ├── env.py
 │   ├── script.py.mako
 │   └── versions
-│       ├── __pycache__
-│       │   └── da0df0781da6_remove_email_field.cpython-310.pyc
-│       └── da0df0781da6_remove_email_field.py
+│       ├── 3177ab115fd4_added_email_field_to_user_model.py
+│       └── __pycache__
+│           └── 3177ab115fd4_added_email_field_to_user_model.cpython-310.pyc
 ├── models.py
 ├── requirements.txt
 ├── review_routes.py
@@ -55,6 +50,8 @@
 ├── templates
 │   ├── aboutUs.html
 │   ├── base.html
+│   ├── book.html
+│   ├── books.html
 │   ├── createRequest.html
 │   ├── findRequests.html
 │   ├── index.html
@@ -62,9 +59,18 @@
 │   ├── mainPage.html
 │   └── signup.html
 ├── tests
+│   ├── __init__.py
 │   ├── __pycache__
-│   │   └── test_auth.cpython-310.pyc
-│   └── test_auth.py
+│   │   ├── test_auth.cpython-310.pyc
+│   │   ├── test_book_routes.cpython-310.pyc
+│   │   ├── test_db.cpython-310.pyc
+│   │   ├── test_models.cpython-310.pyc
+│   │   └── test_review_routes.cpython-310.pyc
+│   ├── test_auth.py
+│   ├── test_book_routes.py
+│   ├── test_db.py
+│   ├── test_models.py
+│   └── test_review_routes.py
 ├── tree.txt
 ├── utilities.py
 └── venv
@@ -82,6 +88,7 @@
     │   ├── python -> /Users/camilolima/anaconda3/bin/python
     │   ├── python3 -> python
     │   └── python3.10 -> python
+    ├── include
     ├── lib
     │   └── python3.10
     │       └── site-packages
@@ -106,6 +113,7 @@
     │           │   ├── LICENSE
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   ├── WHEEL
     │           │   ├── entry_points.txt
     │           │   └── top_level.txt
@@ -114,6 +122,7 @@
     │           │   ├── LICENSE.rst
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   ├── WHEEL
     │           │   └── top_level.txt
     │           ├── SQLAlchemy-2.0.30.dist-info
@@ -306,6 +315,7 @@
     │           │   ├── LICENSE
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   ├── WHEEL
     │           │   ├── entry_points.txt
     │           │   └── top_level.txt
@@ -323,6 +333,7 @@
     │           │   ├── LICENSE.txt
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   └── WHEEL
     │           ├── click
     │           │   ├── __init__.py
@@ -364,6 +375,7 @@
     │           │   ├── LICENSE.rst
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   ├── WHEEL
     │           │   └── top_level.txt
     │           ├── distutils-precedence.pth
@@ -512,6 +524,7 @@
     │           │   ├── LICENSE.rst
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   └── WHEEL
     │           ├── itsdangerous
     │           │   ├── __init__.py
@@ -537,6 +550,7 @@
     │           │   ├── LICENSE.txt
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   └── WHEEL
     │           ├── jinja2
     │           │   ├── __init__.py
@@ -898,10 +912,8 @@
     │           │   │   │   │   ├── __pycache__
     │           │   │   │   │   │   ├── __init__.cpython-310.pyc
     │           │   │   │   │   │   ├── editable_legacy.cpython-310.pyc
-    │           │   │   │   │   │   ├── legacy.cpython-310.pyc
     │           │   │   │   │   │   └── wheel.cpython-310.pyc
     │           │   │   │   │   ├── editable_legacy.py
-    │           │   │   │   │   ├── legacy.py
     │           │   │   │   │   └── wheel.py
     │           │   │   │   └── prepare.py
     │           │   │   ├── pyproject.py
@@ -956,6 +968,7 @@
     │           │   │   │   ├── __init__.py
     │           │   │   │   ├── __pycache__
     │           │   │   │   │   ├── __init__.cpython-310.pyc
+    │           │   │   │   │   ├── _jaraco_text.cpython-310.pyc
     │           │   │   │   │   ├── _log.cpython-310.pyc
     │           │   │   │   │   ├── appdirs.cpython-310.pyc
     │           │   │   │   │   ├── compat.cpython-310.pyc
@@ -963,7 +976,6 @@
     │           │   │   │   │   ├── datetime.cpython-310.pyc
     │           │   │   │   │   ├── deprecation.cpython-310.pyc
     │           │   │   │   │   ├── direct_url_helpers.cpython-310.pyc
-    │           │   │   │   │   ├── distutils_args.cpython-310.pyc
     │           │   │   │   │   ├── egg_link.cpython-310.pyc
     │           │   │   │   │   ├── encoding.cpython-310.pyc
     │           │   │   │   │   ├── entrypoints.cpython-310.pyc
@@ -971,7 +983,6 @@
     │           │   │   │   │   ├── filetypes.cpython-310.pyc
     │           │   │   │   │   ├── glibc.cpython-310.pyc
     │           │   │   │   │   ├── hashes.cpython-310.pyc
-    │           │   │   │   │   ├── inject_securetransport.cpython-310.pyc
     │           │   │   │   │   ├── logging.cpython-310.pyc
     │           │   │   │   │   ├── misc.cpython-310.pyc
     │           │   │   │   │   ├── models.cpython-310.pyc
@@ -983,6 +994,7 @@
     │           │   │   │   │   ├── urls.cpython-310.pyc
     │           │   │   │   │   ├── virtualenv.cpython-310.pyc
     │           │   │   │   │   └── wheel.cpython-310.pyc
+    │           │   │   │   ├── _jaraco_text.py
     │           │   │   │   ├── _log.py
     │           │   │   │   ├── appdirs.py
     │           │   │   │   ├── compat.py
@@ -990,7 +1002,6 @@
     │           │   │   │   ├── datetime.py
     │           │   │   │   ├── deprecation.py
     │           │   │   │   ├── direct_url_helpers.py
-    │           │   │   │   ├── distutils_args.py
     │           │   │   │   ├── egg_link.py
     │           │   │   │   ├── encoding.py
     │           │   │   │   ├── entrypoints.py
@@ -998,7 +1009,6 @@
     │           │   │   │   ├── filetypes.py
     │           │   │   │   ├── glibc.py
     │           │   │   │   ├── hashes.py
-    │           │   │   │   ├── inject_securetransport.py
     │           │   │   │   ├── logging.py
     │           │   │   │   ├── misc.py
     │           │   │   │   ├── models.py
@@ -1038,7 +1048,6 @@
     │           │   │   │   │   ├── _cmd.cpython-310.pyc
     │           │   │   │   │   ├── adapter.cpython-310.pyc
     │           │   │   │   │   ├── cache.cpython-310.pyc
-    │           │   │   │   │   ├── compat.cpython-310.pyc
     │           │   │   │   │   ├── controller.cpython-310.pyc
     │           │   │   │   │   ├── filewrapper.cpython-310.pyc
     │           │   │   │   │   ├── heuristics.cpython-310.pyc
@@ -1055,10 +1064,10 @@
     │           │   │   │   │   │   └── redis_cache.cpython-310.pyc
     │           │   │   │   │   ├── file_cache.py
     │           │   │   │   │   └── redis_cache.py
-    │           │   │   │   ├── compat.py
     │           │   │   │   ├── controller.py
     │           │   │   │   ├── filewrapper.py
     │           │   │   │   ├── heuristics.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── serialize.py
     │           │   │   │   └── wrapper.py
     │           │   │   ├── certifi
@@ -1069,7 +1078,8 @@
     │           │   │   │   │   ├── __main__.cpython-310.pyc
     │           │   │   │   │   └── core.cpython-310.pyc
     │           │   │   │   ├── cacert.pem
-    │           │   │   │   └── core.py
+    │           │   │   │   ├── core.py
+    │           │   │   │   └── py.typed
     │           │   │   ├── chardet
     │           │   │   │   ├── __init__.py
     │           │   │   │   ├── __pycache__
@@ -1080,6 +1090,7 @@
     │           │   │   │   │   ├── charsetgroupprober.cpython-310.pyc
     │           │   │   │   │   ├── charsetprober.cpython-310.pyc
     │           │   │   │   │   ├── codingstatemachine.cpython-310.pyc
+    │           │   │   │   │   ├── codingstatemachinedict.cpython-310.pyc
     │           │   │   │   │   ├── cp949prober.cpython-310.pyc
     │           │   │   │   │   ├── enums.cpython-310.pyc
     │           │   │   │   │   ├── escprober.cpython-310.pyc
@@ -1104,9 +1115,11 @@
     │           │   │   │   │   ├── langthaimodel.cpython-310.pyc
     │           │   │   │   │   ├── langturkishmodel.cpython-310.pyc
     │           │   │   │   │   ├── latin1prober.cpython-310.pyc
+    │           │   │   │   │   ├── macromanprober.cpython-310.pyc
     │           │   │   │   │   ├── mbcharsetprober.cpython-310.pyc
     │           │   │   │   │   ├── mbcsgroupprober.cpython-310.pyc
     │           │   │   │   │   ├── mbcssm.cpython-310.pyc
+    │           │   │   │   │   ├── resultdict.cpython-310.pyc
     │           │   │   │   │   ├── sbcharsetprober.cpython-310.pyc
     │           │   │   │   │   ├── sbcsgroupprober.cpython-310.pyc
     │           │   │   │   │   ├── sjisprober.cpython-310.pyc
@@ -1126,6 +1139,7 @@
     │           │   │   │   │   │   └── chardetect.cpython-310.pyc
     │           │   │   │   │   └── chardetect.py
     │           │   │   │   ├── codingstatemachine.py
+    │           │   │   │   ├── codingstatemachinedict.py
     │           │   │   │   ├── cp949prober.py
     │           │   │   │   ├── enums.py
     │           │   │   │   ├── escprober.py
@@ -1150,6 +1164,7 @@
     │           │   │   │   ├── langthaimodel.py
     │           │   │   │   ├── langturkishmodel.py
     │           │   │   │   ├── latin1prober.py
+    │           │   │   │   ├── macromanprober.py
     │           │   │   │   ├── mbcharsetprober.py
     │           │   │   │   ├── mbcsgroupprober.py
     │           │   │   │   ├── mbcssm.py
@@ -1159,6 +1174,8 @@
     │           │   │   │   │   │   ├── __init__.cpython-310.pyc
     │           │   │   │   │   │   └── languages.cpython-310.pyc
     │           │   │   │   │   └── languages.py
+    │           │   │   │   ├── py.typed
+    │           │   │   │   ├── resultdict.py
     │           │   │   │   ├── sbcharsetprober.py
     │           │   │   │   ├── sbcsgroupprober.py
     │           │   │   │   ├── sjisprober.py
@@ -1178,6 +1195,22 @@
     │           │   │   │   ├── ansi.py
     │           │   │   │   ├── ansitowin32.py
     │           │   │   │   ├── initialise.py
+    │           │   │   │   ├── tests
+    │           │   │   │   │   ├── __init__.py
+    │           │   │   │   │   ├── __pycache__
+    │           │   │   │   │   │   ├── __init__.cpython-310.pyc
+    │           │   │   │   │   │   ├── ansi_test.cpython-310.pyc
+    │           │   │   │   │   │   ├── ansitowin32_test.cpython-310.pyc
+    │           │   │   │   │   │   ├── initialise_test.cpython-310.pyc
+    │           │   │   │   │   │   ├── isatty_test.cpython-310.pyc
+    │           │   │   │   │   │   ├── utils.cpython-310.pyc
+    │           │   │   │   │   │   └── winterm_test.cpython-310.pyc
+    │           │   │   │   │   ├── ansi_test.py
+    │           │   │   │   │   ├── ansitowin32_test.py
+    │           │   │   │   │   ├── initialise_test.py
+    │           │   │   │   │   ├── isatty_test.py
+    │           │   │   │   │   ├── utils.py
+    │           │   │   │   │   └── winterm_test.py
     │           │   │   │   ├── win32.py
     │           │   │   │   └── winterm.py
     │           │   │   ├── distlib
@@ -1221,7 +1254,8 @@
     │           │   │   │   │   ├── __init__.cpython-310.pyc
     │           │   │   │   │   ├── __main__.cpython-310.pyc
     │           │   │   │   │   └── distro.cpython-310.pyc
-    │           │   │   │   └── distro.py
+    │           │   │   │   ├── distro.py
+    │           │   │   │   └── py.typed
     │           │   │   ├── idna
     │           │   │   │   ├── __init__.py
     │           │   │   │   ├── __pycache__
@@ -1239,6 +1273,7 @@
     │           │   │   │   ├── idnadata.py
     │           │   │   │   ├── intranges.py
     │           │   │   │   ├── package_data.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   └── uts46data.py
     │           │   │   ├── msgpack
     │           │   │   │   ├── __init__.py
@@ -1269,43 +1304,16 @@
     │           │   │   │   ├── _musllinux.py
     │           │   │   │   ├── _structures.py
     │           │   │   │   ├── markers.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── requirements.py
     │           │   │   │   ├── specifiers.py
     │           │   │   │   ├── tags.py
     │           │   │   │   ├── utils.py
     │           │   │   │   └── version.py
-    │           │   │   ├── pep517
-    │           │   │   │   ├── __init__.py
-    │           │   │   │   ├── __pycache__
-    │           │   │   │   │   ├── __init__.cpython-310.pyc
-    │           │   │   │   │   ├── _compat.cpython-310.pyc
-    │           │   │   │   │   ├── build.cpython-310.pyc
-    │           │   │   │   │   ├── check.cpython-310.pyc
-    │           │   │   │   │   ├── colorlog.cpython-310.pyc
-    │           │   │   │   │   ├── dirtools.cpython-310.pyc
-    │           │   │   │   │   ├── envbuild.cpython-310.pyc
-    │           │   │   │   │   ├── meta.cpython-310.pyc
-    │           │   │   │   │   └── wrappers.cpython-310.pyc
-    │           │   │   │   ├── _compat.py
-    │           │   │   │   ├── build.py
-    │           │   │   │   ├── check.py
-    │           │   │   │   ├── colorlog.py
-    │           │   │   │   ├── dirtools.py
-    │           │   │   │   ├── envbuild.py
-    │           │   │   │   ├── in_process
-    │           │   │   │   │   ├── __init__.py
-    │           │   │   │   │   ├── __pycache__
-    │           │   │   │   │   │   ├── __init__.cpython-310.pyc
-    │           │   │   │   │   │   └── _in_process.cpython-310.pyc
-    │           │   │   │   │   └── _in_process.py
-    │           │   │   │   ├── meta.py
-    │           │   │   │   └── wrappers.py
     │           │   │   ├── pkg_resources
     │           │   │   │   ├── __init__.py
-    │           │   │   │   ├── __pycache__
-    │           │   │   │   │   ├── __init__.cpython-310.pyc
-    │           │   │   │   │   └── py31compat.cpython-310.pyc
-    │           │   │   │   └── py31compat.py
+    │           │   │   │   └── __pycache__
+    │           │   │   │       └── __init__.cpython-310.pyc
     │           │   │   ├── platformdirs
     │           │   │   │   ├── __init__.py
     │           │   │   │   ├── __main__.py
@@ -1321,6 +1329,7 @@
     │           │   │   │   ├── android.py
     │           │   │   │   ├── api.py
     │           │   │   │   ├── macos.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── unix.py
     │           │   │   │   ├── version.py
     │           │   │   │   └── windows.py
@@ -1426,10 +1435,25 @@
     │           │   │   │   │       └── __init__.cpython-310.pyc
     │           │   │   │   ├── exceptions.py
     │           │   │   │   ├── helpers.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── results.py
     │           │   │   │   ├── testing.py
     │           │   │   │   ├── unicode.py
     │           │   │   │   └── util.py
+    │           │   │   ├── pyproject_hooks
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── __init__.cpython-310.pyc
+    │           │   │   │   │   ├── _compat.cpython-310.pyc
+    │           │   │   │   │   └── _impl.cpython-310.pyc
+    │           │   │   │   ├── _compat.py
+    │           │   │   │   ├── _impl.py
+    │           │   │   │   └── _in_process
+    │           │   │   │       ├── __init__.py
+    │           │   │   │       ├── __pycache__
+    │           │   │   │       │   ├── __init__.cpython-310.pyc
+    │           │   │   │       │   └── _in_process.cpython-310.pyc
+    │           │   │   │       └── _in_process.py
     │           │   │   ├── requests
     │           │   │   │   ├── __init__.py
     │           │   │   │   ├── __pycache__
@@ -1483,6 +1507,7 @@
     │           │   │   │   │   │   └── collections_abc.cpython-310.pyc
     │           │   │   │   │   └── collections_abc.py
     │           │   │   │   ├── providers.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── reporters.py
     │           │   │   │   ├── resolvers.py
     │           │   │   │   └── structs.py
@@ -1497,9 +1522,11 @@
     │           │   │   │   │   ├── _emoji_replace.cpython-310.pyc
     │           │   │   │   │   ├── _export_format.cpython-310.pyc
     │           │   │   │   │   ├── _extension.cpython-310.pyc
+    │           │   │   │   │   ├── _fileno.cpython-310.pyc
     │           │   │   │   │   ├── _inspect.cpython-310.pyc
     │           │   │   │   │   ├── _log_render.cpython-310.pyc
     │           │   │   │   │   ├── _loop.cpython-310.pyc
+    │           │   │   │   │   ├── _null_file.cpython-310.pyc
     │           │   │   │   │   ├── _palettes.cpython-310.pyc
     │           │   │   │   │   ├── _pick.cpython-310.pyc
     │           │   │   │   │   ├── _ratio.cpython-310.pyc
@@ -1570,9 +1597,11 @@
     │           │   │   │   ├── _emoji_replace.py
     │           │   │   │   ├── _export_format.py
     │           │   │   │   ├── _extension.py
+    │           │   │   │   ├── _fileno.py
     │           │   │   │   ├── _inspect.py
     │           │   │   │   ├── _log_render.py
     │           │   │   │   ├── _loop.py
+    │           │   │   │   ├── _null_file.py
     │           │   │   │   ├── _palettes.py
     │           │   │   │   ├── _pick.py
     │           │   │   │   ├── _ratio.py
@@ -1620,6 +1649,7 @@
     │           │   │   │   ├── progress_bar.py
     │           │   │   │   ├── prompt.py
     │           │   │   │   ├── protocol.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── region.py
     │           │   │   │   ├── repr.py
     │           │   │   │   ├── rule.py
@@ -1659,6 +1689,7 @@
     │           │   │   │   ├── before.py
     │           │   │   │   ├── before_sleep.py
     │           │   │   │   ├── nap.py
+    │           │   │   │   ├── py.typed
     │           │   │   │   ├── retry.py
     │           │   │   │   ├── stop.py
     │           │   │   │   ├── tornadoweb.py
@@ -1672,7 +1703,23 @@
     │           │   │   │   │   └── _types.cpython-310.pyc
     │           │   │   │   ├── _parser.py
     │           │   │   │   ├── _re.py
-    │           │   │   │   └── _types.py
+    │           │   │   │   ├── _types.py
+    │           │   │   │   └── py.typed
+    │           │   │   ├── truststore
+    │           │   │   │   ├── __init__.py
+    │           │   │   │   ├── __pycache__
+    │           │   │   │   │   ├── __init__.cpython-310.pyc
+    │           │   │   │   │   ├── _api.cpython-310.pyc
+    │           │   │   │   │   ├── _macos.cpython-310.pyc
+    │           │   │   │   │   ├── _openssl.cpython-310.pyc
+    │           │   │   │   │   ├── _ssl_constants.cpython-310.pyc
+    │           │   │   │   │   └── _windows.cpython-310.pyc
+    │           │   │   │   ├── _api.py
+    │           │   │   │   ├── _macos.py
+    │           │   │   │   ├── _openssl.py
+    │           │   │   │   ├── _ssl_constants.py
+    │           │   │   │   ├── _windows.py
+    │           │   │   │   └── py.typed
     │           │   │   ├── typing_extensions.py
     │           │   │   ├── urllib3
     │           │   │   │   ├── __init__.py
@@ -1728,8 +1775,10 @@
     │           │   │   │   │   │   ├── __init__.py
     │           │   │   │   │   │   ├── __pycache__
     │           │   │   │   │   │   │   ├── __init__.cpython-310.pyc
-    │           │   │   │   │   │   │   └── makefile.cpython-310.pyc
-    │           │   │   │   │   │   └── makefile.py
+    │           │   │   │   │   │   │   ├── makefile.cpython-310.pyc
+    │           │   │   │   │   │   │   └── weakref_finalize.cpython-310.pyc
+    │           │   │   │   │   │   ├── makefile.py
+    │           │   │   │   │   │   └── weakref_finalize.py
     │           │   │   │   │   └── six.py
     │           │   │   │   ├── poolmanager.py
     │           │   │   │   ├── request.py
@@ -1776,7 +1825,8 @@
     │           │   │       ├── tests.py
     │           │   │       └── x_user_defined.py
     │           │   └── py.typed
-    │           ├── pip-22.3.1.dist-info
+    │           ├── pip-24.0.dist-info
+    │           │   ├── AUTHORS.txt
     │           │   ├── INSTALLER
     │           │   ├── LICENSE.txt
     │           │   ├── METADATA
@@ -2877,6 +2927,7 @@
     │           │   ├── LICENSE
     │           │   ├── METADATA
     │           │   ├── RECORD
+    │           │   ├── REQUESTED
     │           │   └── WHEEL
     │           ├── typing_extensions.py
     │           ├── werkzeug
@@ -3019,7 +3070,8 @@
     │               ├── LICENSE.txt
     │               ├── METADATA
     │               ├── RECORD
+    │               ├── REQUESTED
     │               └── WHEEL
     └── pyvenv.cfg
 
-333 directories, 2690 files
+338 directories, 2737 files

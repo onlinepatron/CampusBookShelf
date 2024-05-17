@@ -2,6 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # Distribution / packaging
 .Python
@@ -118,3 +119,9 @@ venv.bak/
 !/CampusBookShelf/static/js/
 !/CampusBookShelf/templates/
 !/CampusBookShelf/tests/
+
+# Ignore __pycache__ inside the tests directory
+/CampusBookShelf/tests/**/__pycache__/
+
+# Ignore the migrations folder and its contents
+/CampusBookShelf/migrations/
