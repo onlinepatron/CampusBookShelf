@@ -57,6 +57,34 @@ nav ul li a {
     margin: 0; 
 }
 
+/* Footer  */
+
+.footer {
+    background-color: hsl(0, 0%, 25%);
+    color: #fff; 
+    padding: 20px 0; 
+    text-align: left; 
+}
+
+.footer .container {
+    max-width: 1200px; 
+    margin: 0 auto; 
+}
+
+.footer a {
+    color: #fff; 
+    text-decoration: none; 
+}
+
+.footer a:hover {
+    text-decoration: underline; 
+}
+
+#footerToHome {
+    font-weight: bold;
+
+}
+
 /* forms */
 
 form {
@@ -142,6 +170,93 @@ img.displaySlide{
 .ReccomendedBooksCarousel .prevCarousel:hover,  .ReccomendedBooksCarousel .nextCarousel:hover {
     background-color: #4b9149;
     color: white;
+}
+
+/* About Us */
+
+#aboutUsPage{
+    .about-section h1 {
+        text-align: center;
+    }
+    .aboutUsTitle {
+        color: #4b9149;
+        font-style: italic;
+        font-weight: bold;
+        font-size: larger;
+    }
+
+    .italic {
+        font-style: italic;
+    }
+
+    .contactUs {
+        color: #4b9149;
+    }
+
+    .column {
+        width: calc(25% - 20px); 
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px; 
+      }
+
+      .card {
+        height: 600px; 
+        width: 250px; 
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative; 
+      }
+
+      .container {
+        flex-grow: 1; 
+        display: flex;
+        flex-direction: column;
+      }
+
+      .aboutUs_button {
+        font-size: 14px; 
+        padding: 6px 12px;
+        width: 150px;
+        position: absolute;
+        bottom: 10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+      }
+
+      @media (max-width: 1200px) {
+        .column {
+          width: calc(50% - 20px); 
+        }
+      }
+
+      @media (max-width: 768px) {
+        .card {
+          height: 350px; 
+          width: 200px; 
+        }
+
+        .info > * {
+          font-size: 12px; 
+        }
+
+        .column {
+          width: calc(50% - 20px); 
+        }
+      }
+
+      @media (max-width: 480px) {
+        .card {
+          height: 300px; 
+          width: 150px; 
+        }
+
+        .column {
+          width: calc(100% - 20px); 
+        }
+      }
+
 }
 
 /* Buttons */

@@ -2,8 +2,7 @@
 const ReccomendedBooks = document.querySelectorAll(".ReccomendedBooks img");
 let slideIndex = 0;
 let intervalId = null;
-/* 
-document.addEventListener("DOMContentLoaded", initializeSlider); */
+
 
 initializeSlider();
 function initializeSlider(){
