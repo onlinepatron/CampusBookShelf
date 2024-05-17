@@ -26,7 +26,7 @@ def add_book():
         new_book = Book(title=title, author=author, genre=genre, synopsis=synopsis, image_url=image_url)
         db.session.add(new_book)
         db.session.commit()
-        flash('Book added successfully!', 'success')
+        flash('Book added successfully', 'success')
         return redirect(url_for('book.get_books'))
     return render_template('add_book.html')
 
@@ -40,7 +40,7 @@ def update_book(book_id):
         book.synopsis = request.form.get('synopsis', '')
         book.image_url = request.form.get('image_url', '')
         db.session.commit()
-        flash('Book updated successfully!', 'success')
+        flash('Book updated successfully', 'success')
         return redirect(url_for('book.get_book', book_id=book.id))
     return render_template('update_book.html', book=book)
 
@@ -49,7 +49,7 @@ def delete_book(book_id):
     book = db.session.get(Book, book_id)
     db.session.delete(book)
     db.session.commit()
-    flash('Book deleted successfully!', 'success')
+    flash('Book deleted successfully', 'success')
     return redirect(url_for('book.get_books'))
 
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
@@ -61,12 +61,12 @@ def rate_books():
         review_text = request.form.get('review')
         book = Book.query.get(book_id)
         if not book:
-            flash('Book not found!', 'danger')
+            flash('Book not found', 'danger')
             return redirect(url_for('book.rate_books'))
         review = Review(user_id=current_user.id, book_id=book.id, rating=rating, text=review_text)
         db.session.add(review)
         db.session.commit()
-        flash('Your review has been submitted!', 'success')
+        flash('Your review has been submitted', 'success')
         return redirect(url_for('book.get_books'))
     books = Book.query.all()
     return render_template('rateBooks.html', books=books)
