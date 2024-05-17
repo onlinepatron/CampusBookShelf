@@ -106,7 +106,7 @@ env/
 env.bak/
 venv.bak/
 
-# Allow backend files, frontend files, and test files
+# Allow backend files and frontend files
 !/CampusBookShelf/auth.py
 !/CampusBookShelf/db.py
 !/CampusBookShelf/models.py
@@ -118,10 +118,10 @@ venv.bak/
 !/CampusBookShelf/static/images/
 !/CampusBookShelf/static/js/
 !/CampusBookShelf/templates/
-!/CampusBookShelf/tests/
 
-# Ignore __pycache__ inside the tests directory
-/CampusBookShelf/tests/**/__pycache__/
+# Allow specific files inside the tests directory
+!/CampusBookShelf/tests/__init__.py
+!/CampusBookShelf/tests/test_*.py
 
 # Ignore the migrations folder and its contents
 /CampusBookShelf/migrations/
