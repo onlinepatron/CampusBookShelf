@@ -12,7 +12,7 @@ def get_books():
 
 @book_bp.route('/book/<int:book_id>')
 def get_book(book_id):
-    book = db.session.get(Book, book_id)  # Updated line
+    book = db.session.get(Book, book_id)
     return render_template('book.html', book=book)
 
 @book_bp.route('/add_book', methods=['GET', 'POST'])
@@ -32,7 +32,7 @@ def add_book():
 
 @book_bp.route('/update_book/<int:book_id>', methods=['GET', 'POST'])
 def update_book(book_id):
-    book = db.session.get(Book, book_id)  # Updated line
+    book = db.session.get(Book, book_id)
     if request.method == 'POST':
         book.title = request.form.get('title')
         book.author = request.form.get('author')
@@ -46,7 +46,7 @@ def update_book(book_id):
 
 @book_bp.route('/delete_book/<int:book_id>', methods=['POST'])
 def delete_book(book_id):
-    book = db.session.get(Book, book_id)  # Updated line
+    book = db.session.get(Book, book_id)
     db.session.delete(book)
     db.session.commit()
     flash('Book deleted successfully!', 'success')
@@ -59,19 +59,14 @@ def rate_books():
         book_id = request.form.get('book_id')
         rating = request.form.get('rating')
         review_text = request.form.get('review')
-
-        # Ensure book and user exist
         book = Book.query.get(book_id)
         if not book:
             flash('Book not found!', 'danger')
             return redirect(url_for('book.rate_books'))
-
-        # Create and save the review
         review = Review(user_id=current_user.id, book_id=book.id, rating=rating, text=review_text)
         db.session.add(review)
         db.session.commit()
         flash('Your review has been submitted!', 'success')
         return redirect(url_for('book.get_books'))
-
     books = Book.query.all()
     return render_template('rateBooks.html', books=books)
