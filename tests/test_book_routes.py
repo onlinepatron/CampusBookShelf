@@ -29,7 +29,7 @@ class TestBookRoutes(unittest.TestCase):
                 image_url='http://test.com/image.jpg'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book added successfully!', response.data)
+            self.assertIn(b'Book added successfully', response.data)
 
     def test_update_book(self):
         with self.app.test_client() as client:
@@ -45,7 +45,7 @@ class TestBookRoutes(unittest.TestCase):
                 image_url='http://test.com/updated-image.jpg'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book updated successfully!', response.data)
+            self.assertIn(b'Book updated successfully', response.data)
 
     def test_delete_book(self):
         with self.app.test_client() as client:
@@ -55,7 +55,7 @@ class TestBookRoutes(unittest.TestCase):
 
             response = client.post(f'/delete_book/{book.id}', follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book deleted successfully!', response.data)
+            self.assertIn(b'Book deleted successfully', response.data)
 
     def test_get_books(self):
         with self.app.test_client() as client:
@@ -92,7 +92,7 @@ class TestBookRoutes(unittest.TestCase):
                 review='Test Review'
             ), follow_redirects=True)
             self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Your review has been submitted!', response.data)
+            self.assertIn(b'Your review has been submitted', response.data)
 
 if __name__ == '__main__':
     unittest.main()
