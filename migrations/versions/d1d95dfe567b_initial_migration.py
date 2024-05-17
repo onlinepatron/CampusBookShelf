@@ -1,8 +1,8 @@
-"""Added email field to User model
+"""Initial migration
 
-Revision ID: 3177ab115fd4
+Revision ID: d1d95dfe567b
 Revises: 
-Create Date: 2024-05-16 22:32:17.434232
+Create Date: 2024-05-17 09:41:19.780586
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3177ab115fd4'
+revision = 'd1d95dfe567b'
 down_revision = None
 branch_labels = None
 depends_on = None
