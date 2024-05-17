@@ -52,6 +52,14 @@ def delete_book(book_id):
     flash('Book deleted successfully', 'success')
     return redirect(url_for('book.get_books'))
 
+@book_bp.route('/createRequest', methods=['GET', 'POST'])
+def create_request():
+    title = request.args.get('title')
+    author = request.args.get('author')
+    genre = request.args.get('genre')
+    if title and author and genre:
+        return render_template('createRequest.html', title=title, author=author, genre=genre)
+
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
 def rate_books():
