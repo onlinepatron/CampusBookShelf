@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash
 from app import db
-from models import Book, Review
+from models import Book, Review, Comment
 from flask_login import login_required, current_user
 
 book_bp = Blueprint('book', __name__)
@@ -71,9 +71,10 @@ def create_request():
         db.session.commit()
 
         flash('Your book request has been successfully submitted!', 'success')
-        return redirect(url_for('index'))  # Redirect to the home page
+        return redirect(url_for('main'))  # Redirect to the home page
 
     return render_template('createRequest.html')    
+
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
 def rate_books():
@@ -95,7 +96,9 @@ def rate_books():
 
 @book_bp.route('/findRequests')
 def find_requests_page():
-    return render_template('findRequests.html')
+    books = Book.query.all()
+    return render_template('findRequests.html', books=books)
+
 
 @book_bp.route('/api/findRequests', methods=['GET'])
 def api_find_requests():
@@ -110,4 +113,16 @@ def api_find_requests():
 
     books = query.all()
     result = [book.serialize() for book in books]
+    for book in result:
+        comments = Comment.query.filter_by(book_id=book['id']).all()
+        book['comments'] = [{'id': comment.id, 'user': comment.user.username, 'text': comment.text} for comment in comments]
     return jsonify(result)
+
+@book_bp.route('/book/<int:book_id>/comment', methods=['POST'])
+@login_required
+def add_book_comment(book_id):
+    text = request.form.get('text')
+    comment = Comment(user_id=current_user.id, book_id=book_id, text=text)
+    db.session.add(comment)
+    db.session.commit()
+    return redirect(url_for('book.find_requests_page'))
