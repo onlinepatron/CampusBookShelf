@@ -21,6 +21,14 @@ h2 {
 
 /* nav bar */
 
+#logoHome{
+    color: #4b9149;
+}
+
+#logoHome:hover {
+    color: #3b7439;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -39,6 +47,27 @@ nav ul li a {
 .navbar-nav .nav-item.nav-link:hover {
     color: #4b9149; 
 }
+
+
+.navbar-toggler {
+    border: none;
+}
+
+#navIcon {
+    font-size: 1.2rem; 
+    width: 20px; 
+}
+
+#navIcon:hover {
+    color: #4b9149;
+}
+
+
+
+#login:hover , #logout:hover {
+    color: rgb(254, 122, 122);
+}
+
 
 .mainGreeting {
     position: relative;
@@ -79,6 +108,14 @@ nav ul li a {
     margin: 0;
 }
 
+
+
+
+/* Logo */
+
+.logo {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 /* Footer  */
 
