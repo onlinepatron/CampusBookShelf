@@ -21,6 +21,10 @@ h2 {
 
 /* nav bar */
 
+#logoHome{
+    color: #4b9149;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
@@ -39,6 +43,12 @@ nav ul li a {
 .navbar-nav .nav-item.nav-link:hover {
     color: #4b9149; 
 }
+
+
+#navbar-toggler:hover {
+    color: #4b9149;
+}
+
 
 .mainGreeting {
     position: relative;
@@ -79,6 +89,14 @@ nav ul li a {
     margin: 0;
 }
 
+
+
+
+/* Logo */
+
+.logo {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 
 /* Footer  */
 
