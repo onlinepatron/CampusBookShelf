@@ -1,4 +1,3 @@
-from flask import app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from extensions import db, login_manager
@@ -50,3 +49,16 @@ class Review(db.Model):
 
 User.reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
 Book.reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship('User', back_populates='comments')
+    book = db.relationship('Book', back_populates='comments')
+
+User.comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
+Book.comments = db.relationship('Comment', back_populates='book', cascade='all, delete-orphan')
