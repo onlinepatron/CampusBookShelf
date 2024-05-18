@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash
 from app import db
 from models import Book, Review
 from flask_login import login_required, current_user
@@ -92,3 +92,22 @@ def rate_books():
         return redirect(url_for('book.get_books'))
     books = Book.query.all()
     return render_template('rateBooks.html', books=books)
+
+@book_bp.route('/findRequests')
+def find_requests_page():
+    return render_template('findRequests.html')
+
+@book_bp.route('/api/findRequests', methods=['GET'])
+def api_find_requests():
+    genre = request.args.get('genre')
+    title = request.args.get('title')
+    query = Book.query
+
+    if genre:
+        query = query.filter(Book.genre.ilike(f"%{genre}%"))
+    if title:
+        query = query.filter(Book.title.ilike(f"%{title}%"))
+
+    books = query.all()
+    result = [book.serialize() for book in books]
+    return jsonify(result)
