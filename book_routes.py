@@ -71,7 +71,7 @@ def create_request():
         db.session.commit()
 
         flash('Your book request has been successfully submitted!', 'success')
-        return redirect(url_for('index'))  # Redirect to the home page
+        return redirect(url_for('main'))  # Redirect to the home page
 
     return render_template('createRequest.html')    
 
