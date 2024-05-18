@@ -26,6 +26,16 @@ class Book(db.Model):
     synopsis = db.Column(db.Text, nullable=True)
     image_url = db.Column(db.String(200), nullable=True)
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "author": self.author,
+            "genre": self.genre,
+            "synopsis": self.synopsis,
+            "image_url": self.image_url
+        }
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
