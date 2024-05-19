@@ -40,33 +40,27 @@
 
     <div class="row">
         {% for book in books %}
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="BooksImage">
-                <img class="card-img" src="{{ book.image_url }}" alt="{{ book.title }}">
-                </div>
-                <div class="card-body" id="browsebooksform">
-                    <h5 class="card-title">{{ book.title }}</h5>
-                    <p class="card-text">{{ book.synopsis }}</p>
-                    {% if book.reviews %}
-                        <p class="card-text"><strong>Reviews:</strong></p>
-                        <div class="reviews-container">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="BooksImage">
+                        <img class="card-img" src="{{ book.image_url }}" alt="{{ book.title }}">
+                    </div>
+                    <div class="card-body" id="browsebooksform">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">{{ book.synopsis }}</p>
+                        <a href="{{ url_for('book.get_book', book_id=book.id) }}" class="SmallButton">Details</a>
+                    </div>
+                    <div class="card-footer">
+                        <h6>Reviews:</h6>
+                        <ul>
                             {% for review in book.reviews %}
-                                <p>{{ review.rating_description() }}: {{ review.text }}</p>
+                                <li>{{ review.text }} - {{ review.rating_description }}</li>
                             {% endfor %}
-                        </div>
-                    {% else %}
-                        <p class="card-text">No reviews yet.</p>
-                    {% endif %}
-                    <a href="{{ url_for('book.get_book', book_id=book.id) }}" class="SmallButton">Details</a>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        
-    {% endfor %}
+        {% endfor %}
     </div>
-    
-    
 </div>
 {% endblock %}

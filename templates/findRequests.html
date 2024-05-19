@@ -8,12 +8,12 @@
   
   <form id="searchForm" class="mb-3">
     <div class="form-group">
-      <label for="genre">Genre:</label>
-      <input type="text" class="form-control" id="genre" name="genre">
+      <label for="title">Book Title:</label>
+      <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="form-group">
-      <label for="title">Title:</label>
-      <input type="text" class="form-control" id="title" name="title">
+      <label for="genre">Genre:</label>
+      <input type="text" class="form-control" id="genre" name="genre">
     </div>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Search results will be inserted here -->
+        <!-- Results will be appended here by JavaScript -->
       </tbody>
     </table>
   </div>
@@ -61,10 +61,10 @@ $(document).ready(function() {
                 <td>
                   <div class="comments">
                     <h6>Comments:</h6>
-                    ${request.comments.map(comment => `<p>${comment.user_id}: ${comment.text}</p>`).join('')}
+                    ${request.comments ? request.comments.map(comment => `<p>${comment.user}: ${comment.text}</p>`).join('') : ''}
                   </div>
                   <div class="comment-box">
-                    <form action="/book/${request.id}/comment" method="post">
+                    <form id="commentForm-${request.id}" data-request-id="${request.id}">
                       <textarea name="text" required></textarea>
                       <button type="submit" class="btn btn-primary">Add Comment</button>
                     </form>
@@ -75,7 +75,7 @@ $(document).ready(function() {
             resultsBody.append(row);
           });
         } else {
-          resultsBody.append('<tr><td colspan="5">No requests found.</td></tr>');
+          resultsBody.append('<tr><td colspan="5">No book requests found.</td></tr>');
         }
       },
       error: function() {
@@ -85,14 +85,35 @@ $(document).ready(function() {
     });
   }
 
-  // Load all requests initially
-  loadRequests();
+  $(document).on('submit', '[id^=commentForm-]', function(e) {
+    e.preventDefault();
+    const requestId = $(this).data('request-id');
+    const text = $(this).find('textarea[name="text"]').val();
+    addComment(requestId, text);
+  });
+
+  function addComment(requestId, text) {
+    $.ajax({
+      url: `/book_request/${requestId}/comment`,
+      type: 'POST',
+      data: { text: text },
+      success: function(response) {
+        console.log('Comment added:', response);
+        loadRequests();
+      },
+      error: function() {
+        alert('Error adding comment. Please try again.');
+      }
+    });
+  }
 
   $('#searchForm').on('submit', function(e) {
     e.preventDefault();
     const formData = $(this).serialize();
     loadRequests(formData);
   });
+
+  loadRequests();
 });
 </script>
 {% endblock %}
