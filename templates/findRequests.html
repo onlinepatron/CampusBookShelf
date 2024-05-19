@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Find Book Requests</h2>
+  <h2 class="formTitle">Find Book Requests</h2>
   
   <form id="searchForm" class="mb-3">
     <div class="form-group">
@@ -19,8 +19,9 @@
   </form>
 
   <div class="table-responsive">
+    <h1 class="formRequestTitle">Requested Books</h1>
     <table id="resultsTable" class="table mt-4">
-      <thead class="thead-dark">
+      <thead class="thead-custom-green">
         <tr>
           <th>Title</th>
           <th>Author</th>
@@ -54,14 +55,14 @@ $(document).ready(function() {
           response.forEach(function(request) {
             const row = `
               <tr>
-                <td>${request.title}</td>
-                <td>${request.author}</td>
+                <td><strong>${request.title}</strong></td>
+                <td><em>${request.author}</em></td>
                 <td>${request.genre}</td>
                 <td>${request.message}</td>
                 <td>
                   <div class="comments">
                     <h6>Comments:</h6>
-                    ${request.comments ? request.comments.map(comment => `<p>${comment.user}: ${comment.text}</p>`).join('') : ''}
+                    ${request.comments ? request.comments.map(comment => `<p><span class="commentUsername">${comment.user}:</span> ${comment.text}</p>`).join('') : ''}
                   </div>
                   <div class="comment-box">
                     <form id="commentForm-${request.id}" data-request-id="${request.id}">
