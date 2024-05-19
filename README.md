@@ -6,23 +6,24 @@ This project is a bookstore and review application developed as part of our cour
 
 ## Purpose
 
-The purpose of this project is to create a bookstore and review application that will earn us an HD grade. The application provides the following features:
+The purpose of this project is to develop a comprehensive bookstore and review application aimed at achieving an HD grade. The application provides the following features:
 
 **User Authentication:**
 - Users can sign up and log in securely to access the application's features.
 - Password hashing for enhanced security.
 
 **Book Catalog:**
-- Comprehensive catalog of books with detailed information including title, author, genre, synopsis, picture, etc.
+- A comprehensive catalog of books with detailed information including title, author, genre, synopsis, and pictures.
 - Ability to search for books based on genre.
 
 **Book Reviews:**
 - Users can rate and review books they have read once they have signed in.
-- Option to sort books by highest rated to lowest rated.
+- Books can be sorted by rating, from highest to lowest, making it easier to discover top-rated books.
 - Users can easily discover and explore new releases.
 
 **About us:**
-- Display of the four members who created the page, including their favorite books and a little information about each member.
+- A section showcasing the four members who created the application.
+- Each member's favorite books and a brief biography are displayed.
 
 
 ## Group Members
