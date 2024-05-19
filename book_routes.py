@@ -16,6 +16,7 @@ def get_book(book_id):
     return render_template('book.html', book=book)
 
 @book_bp.route('/update_book/<int:book_id>', methods=['GET', 'POST'])
+@login_required
 def update_book(book_id):
     book = db.session.get(Book, book_id)
     if request.method == 'POST':
@@ -30,6 +31,7 @@ def update_book(book_id):
     return render_template('update_book.html', book=book)
 
 @book_bp.route('/delete_book/<int:book_id>', methods=['POST'])
+@login_required
 def delete_book(book_id):
     book = db.session.get(Book, book_id)
     db.session.delete(book)
@@ -86,7 +88,6 @@ def find_requests_page():
     books = BookRequest.query.all()
     return render_template('findRequests.html', books=books)
 
-
 @book_bp.route('/api/findRequests', methods=['GET'])
 @login_required
 def api_find_requests():
@@ -103,11 +104,18 @@ def api_find_requests():
     result = [request.serialize() for request in requests]
     return jsonify(result)
 
-@book_bp.route('/book/<int:book_id>/comment', methods=['POST'])
+@book_bp.route('/book_request/<int:request_id>/comment', methods=['POST'])
 @login_required
-def add_book_comment(book_id):
+def add_book_request_comment(request_id):
     text = request.form.get('text')
-    comment = Comment(user_id=current_user.id, book_id=book_id, text=text)
+    if not text:
+        return jsonify({'error': 'Comment text is required'}), 400
+    comment = Comment(user_id=current_user.id, book_id=request_id, text=text)
     db.session.add(comment)
     db.session.commit()
-    return redirect(url_for('book.find_requests_page'))
+    comment_data = {
+        'user': current_user.username,
+        'text': comment.text
+    }
+    return jsonify({'message': 'Comment added successfully', 'comment': comment_data}), 201
+
