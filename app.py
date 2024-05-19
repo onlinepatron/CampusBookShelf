@@ -3,6 +3,9 @@ from flask_login import login_required
 from extensions import db, migrate, login_manager
 from admin import admin_bp
 from models import User
+from profile_routes import profile_bp
+
+
 
 def create_admin():
     admin_username = 'root'
@@ -38,7 +41,8 @@ def create_app():
         app.register_blueprint(book_bp)
         app.register_blueprint(review_bp)
         app.register_blueprint(admin_bp)
-
+        app.register_blueprint(profile_bp)
+        
         db.create_all()
         create_admin()
         

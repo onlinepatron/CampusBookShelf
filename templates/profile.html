@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>My Profile</h1>
+
+    <h2>Reviews</h2>
+    {% if reviews %}
+        {% for review in reviews %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.book.title }}</h5>
+                    <p class="card-text">Rating: {{ review.rating }}</p>
+                    <p class="card-text">{{ review.text }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No reviews found.</p>
+    {% endif %}
+
+    <h2>Book Requests</h2>
+    {% if book_requests %}
+        {% for book_request in book_requests %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book_request.title }}</h5>
+                    <p class="card-text">Author: {{ book_request.author }}</p>
+                    <p class="card-text">Genre: {{ book_request.genre }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No book requests found.</p>
+    {% endif %}
+
+    <h2>Comments</h2>
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ comment.book_request.title }}</h5>
+                    <p class="card-text">{{ comment.text }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No comments found.</p>
+    {% endif %}
+</div>
+{% endblock %}

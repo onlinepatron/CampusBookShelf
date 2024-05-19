@@ -29,6 +29,7 @@
                     {% if current_user.is_admin %}
                         <a class="nav-item nav-link" id="uploadBook" href="{{ url_for('admin.upload_book') }}">Upload Book</a>
                     {% endif %}
+                    <a class="nav-item nav-link" id="myProfile" href="{{ url_for('profile.my_profile') }}">My Profile</a>
                     <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
