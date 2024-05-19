@@ -15,21 +15,6 @@ def get_book(book_id):
     book = db.session.get(Book, book_id)
     return render_template('book.html', book=book)
 
-@book_bp.route('/add_book', methods=['GET', 'POST'])
-def add_book():
-    if request.method == 'POST':
-        title = request.form.get('title')
-        author = request.form.get('author')
-        genre = request.form.get('genre')
-        synopsis = request.form.get('synopsis', '')
-        image_url = request.form.get('image_url', '')
-        new_book = Book(title=title, author=author, genre=genre, synopsis=synopsis, image_url=image_url)
-        db.session.add(new_book)
-        db.session.commit()
-        flash('Book added successfully', 'success')
-        return redirect(url_for('book.get_books'))
-    return render_template('add_book.html')
-
 @book_bp.route('/update_book/<int:book_id>', methods=['GET', 'POST'])
 def update_book(book_id):
     book = db.session.get(Book, book_id)

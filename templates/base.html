@@ -5,65 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>{% block title %}Home{% endblock %}</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
-    <a class="navbar-brand" id="logoHome" href="/">
-        <span class="logo"><span class="font-campus">Campus</span>BookShelf</span>
-    </a>
-    <button id="navbarToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
-        <span id="navIcon" class="fa fa-bars"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+        <a class="navbar-brand" id="logoHome" href="/">
+            <span class="logo"><span class="font-campus">Campus</span>BookShelf</span>
+        </a>
+        <button id="navbarToggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span id="navIcon" class="fa fa-bars"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <div class="navbar-nav ml-auto">
+                <!-- <a class="nav-item nav-link" id="home" href="/">Home</a> -->
+                <a class="nav-item nav-link" id="requestBooks" href="/createRequest">Request Books</a>
+                <a class="nav-item nav-link" id="browseBooks" href="/books">Browse Books</a>
+                <a class="nav-item nav-link" id="rateBooks" href="/rate-books">Rate Books</a>
+                <a class="nav-item nav-link" id="aboutUs" href="/about-us">About Us</a>
+                {% if current_user.is_authenticated %}
+                    {% if current_user.is_admin %}
+                        <a class="nav-item nav-link" id="uploadBook" href="{{ url_for('admin.upload_book') }}">Upload Book</a>
+                    {% endif %}
+                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                {% else %}
+                    <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+                    <a class="nav-item nav-link" id="login" href="/login">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
-        <div class="navbar-nav ml-auto">
-            <!-- <a class="nav-item nav-link" id="home" href="/">Home</a> -->
-            <a class="nav-item nav-link" id="requestBooks" href="/createRequest">Request Books</a>
-            <a class="nav-item nav-link" id="browseBooks" href="/books">Browse Books</a>
-            <a class="nav-item nav-link" id="rateBooks" href="/rate-books">Rate Books</a>
-            <a class="nav-item nav-link" id="aboutUs" href="/about-us">About Us</a>
-            <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-            <a class="nav-item nav-link" id="login" href="/login">Login</a>
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+    <div class="mainGreeting">
+        <img class="bannerImage" src="{{ url_for('static', filename='images/BannerBG4.png') }}" alt="CampusBookShelfBanner">
+        <div class="mainText-container">
+            <h1><span class="font-campus">Campus</span>BookShelf</h1>
+            <p>Students favourite way to find and share books!</p>
         </div>
     </div>
-</nav>
 
-<div class="mainGreeting">
-    <img class="bannerImage" src="{{ url_for('static', filename='images/BannerBG4.png') }}" alt="CampusBookShelfBanner">
-    <div class="mainText-container"> 
-        <h1><span class="font-campus">Campus</span>BookShelf</h1>
-        <p>Students favourite way to find and share books!</p>
-    </div>
-</div>
+    <main class="main-content mt-4">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
 
-<main class="main-content mt-4">
-    <div class="container">
-        {% block content %}
-        {% endblock %}
-    </div>
-</main>
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
-<footer class="footer">
-    <div class="container">
-        <a href="/" id="footerToHome">CampusBookShelf</a>
-        <br>
-        <a href="/about-us">About Us</a> | <a href="/login">Log In</a>
-        <br>
-        <span>&copy; 2024. All rights reserved.</span>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+            <a href="/" id="footerToHome">CampusBookShelf</a>
+            <br>
+            <a href="/about-us">About Us</a> | <a href="/login">Log In</a>
+            <br>
+            <span>&copy; 2024. All rights reserved.</span>
+        </div>
+    </footer>
 
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-<script src="static/js/navbar.js"></script>
-{% block scripts %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/navbar.js"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
