@@ -92,8 +92,6 @@ dmypy.json
 *.log
 *.sql
 *.sqlite
-*.db
-*.sqlite3
 
 # OS-generated files
 Thumbs.db
@@ -118,13 +116,3 @@ venv.bak/
 !/CampusBookShelf/static/images/
 !/CampusBookShelf/static/js/
 !/CampusBookShelf/templates/
-
-# Allow specific files inside the tests directory
-!/CampusBookShelf/tests/__init__.py
-!/CampusBookShelf/tests/test_*.py
-
-# Ignore the migrations folder and its contents
-migrations/
-
-# Ignore the database file
-instance/campusbookshelf.db
