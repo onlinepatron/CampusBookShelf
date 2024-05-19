@@ -57,7 +57,8 @@ Instructions for how to run the tests for the application
 
 # Run Test Files
 
-Use "python -m unittest discover -s tests" to run the series of tests on the backend file
+This command does the following:
 
-
-
+python -m unittest: This runs the unittest module as a script, allowing you to execute tests.
+discover: This is a command-line option that tells unittest to discover and run tests in a specified directory.
+-s tests: This specifies the directory where unittest should start discovering tests. In this case, it assumes that test files are located in a directory named "tests".
