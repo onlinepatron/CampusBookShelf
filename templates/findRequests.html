@@ -4,23 +4,26 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h2>Find Book Requests</h2>
+
   
   <form id="searchForm" class="mb-3">
+    <h2 class="formTitle">View Book Requests</h2>
+    <p class="formText">Share your spare books to someone looking for a copy</p>
     <div class="form-group">
-      <label for="title">Book Title:</label>
+      <label for="title">Book:</label>
       <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="form-group">
       <label for="genre">Genre:</label>
       <input type="text" class="form-control" id="genre" name="genre">
     </div>
-    <button type="submit" class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-primary">Filter Requests</button>
   </form>
 
   <div class="table-responsive">
+    <h1 class="formRequestTitle">Requested Books</h1>
     <table id="resultsTable" class="table mt-4">
-      <thead class="thead-dark">
+      <thead class="thead-custom-green">
         <tr>
           <th>Title</th>
           <th>Author</th>
@@ -61,7 +64,6 @@ $(document).ready(function() {
                 <td>${request.message}</td>
                 <td>
                   <div class="comments" id="comments-${request.id}">
-                    <h6>Comments:</h6>
                     ${commentsHtml}
                   </div>
                   <div class="comment-box">

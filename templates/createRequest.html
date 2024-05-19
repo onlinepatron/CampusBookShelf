@@ -5,6 +5,7 @@
 {% block content %}
     <form action="/createRequest" method="POST">
         <h2 class="formTitle">Book Request</h2>
+        <p class="formText">Request a book you've been eyeing</p>
         <div class="form-group">
             <label for="title">Book Title:</label>
             <input type="text" id="title" name="title" required class="form-control" value="{{ title }}">

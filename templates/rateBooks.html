@@ -14,8 +14,9 @@
         {% endif %}
     {% endwith %}
 
-    <h1>Rate Books</h1>
     <form action="{{ url_for('book.rate_books') }}" method="POST">
+        <h2 class="formTitle">Rate Books</h2>
+        <p class="formText"> Let others know what you thought</p>
         <div class="form-group">
             <label for="book">Select Book:</label>
             <select id="book" name="book_id" class="form-control" required>
