@@ -28,7 +28,6 @@ share/python-wheels/
 pip-log.txt
 pip-delete-this-directory.txt
 
-
 # pyenv
 .python-version
 
@@ -90,7 +89,7 @@ env/
 env.bak/
 venv.bak/
 
-# Allow backend files and frontend files
+# Allow specific files and directories
 !/CampusBookShelf/auth.py
 !/CampusBookShelf/db.py
 !/CampusBookShelf/models.py
@@ -102,3 +101,5 @@ venv.bak/
 !/CampusBookShelf/static/images/
 !/CampusBookShelf/static/js/
 !/CampusBookShelf/templates/
+!/CampusBookShelf/instance/
+!/CampusBookShelf/tests/

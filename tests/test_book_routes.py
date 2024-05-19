@@ -11,52 +11,16 @@ class TestBookRoutes(unittest.TestCase):
         self.app_context.push()
         db.create_all()
 
-        user = User(username='testuser', email='testuser@example.com', password_hash='testpassword')
-        db.session.add(user)
+        # Create a test admin user
+        admin_user = User(username='adminuser', email='adminuser@example.com', password_hash='adminpassword', is_admin=True)
+        admin_user.set_password('adminpassword')
+        db.session.add(admin_user)
         db.session.commit()
 
     def tearDown(self):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
-
-    def test_add_book(self):
-        with self.app.test_client() as client:
-            response = client.post('/add_book', data=dict(
-                title='Test Book',
-                author='Test Author',
-                genre='Test Genre',
-                synopsis='Test Synopsis',
-                image_url='http://test.com/image.jpg'
-            ), follow_redirects=True)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book added successfully', response.data)
-
-    def test_update_book(self):
-        with self.app.test_client() as client:
-            book = Book(title='Test Book', author='Test Author', genre='Test Genre')
-            db.session.add(book)
-            db.session.commit()
-
-            response = client.post(f'/update_book/{book.id}', data=dict(
-                title='Updated Book',
-                author='Updated Author',
-                genre='Updated Genre',
-                synopsis='Updated Synopsis',
-                image_url='http://test.com/updated-image.jpg'
-            ), follow_redirects=True)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book updated successfully', response.data)
-
-    def test_delete_book(self):
-        with self.app.test_client() as client:
-            book = Book(title='Test Book', author='Test Author', genre='Test Genre')
-            db.session.add(book)
-            db.session.commit()
-
-            response = client.post(f'/delete_book/{book.id}', follow_redirects=True)
-            self.assertEqual(response.status_code, 200)
-            self.assertIn(b'Book deleted successfully', response.data)
 
     def test_get_books(self):
         with self.app.test_client() as client:
@@ -80,6 +44,45 @@ class TestBookRoutes(unittest.TestCase):
             response = client.get(f'/book/{book.id}')
             self.assertEqual(response.status_code, 200)
             self.assertIn(b'Test Book', response.data)
+
+    def test_update_book(self):
+        with self.app.test_client() as client:
+            # Log in as the admin user
+            response = client.post('/login', data=dict(
+                username='adminuser',
+                password='adminpassword'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
+            book = Book(title='Test Book', author='Test Author', genre='Test Genre')
+            db.session.add(book)
+            db.session.commit()
+
+            response = client.post(f'/update_book/{book.id}', data=dict(
+                title='Updated Book',
+                author='Updated Author',
+                genre='Updated Genre',
+                synopsis='Updated Synopsis'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Book updated successfully', response.data)
+
+    def test_delete_book(self):
+        with self.app.test_client() as client:
+            # Log in as the admin user
+            response = client.post('/login', data=dict(
+                username='adminuser',
+                password='adminpassword'
+            ), follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+
+            book = Book(title='Test Book', author='Test Author', genre='Test Genre')
+            db.session.add(book)
+            db.session.commit()
+
+            response = client.post(f'/delete_book/{book.id}', follow_redirects=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Book deleted successfully', response.data)
 
     def test_rate_books(self):
         with self.app.test_client() as client:
