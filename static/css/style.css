@@ -154,6 +154,13 @@ nav ul li a {
 
 }
 
+.cssValid{
+    position: relative; /* Change position to relative */
+    float: right; /* Float the image to the right within the container */
+    margin-left: 10px; 
+   
+}
+
 /* forms */
 
 .formTitle {
