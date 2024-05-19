@@ -24,8 +24,6 @@ The purpose of this project is to create a bookstore and review application that
 **About us:**
 - Display of the four members who created the page, including their favorite books and a little information about each member.
 
-**User Profile:**
-- Users have personalized profiles where they can view their activity, reviews, and favorites.
 
 ## Group Members
 
@@ -94,5 +92,3 @@ This command does the following:
 - `python -m unittest`: This runs the unittest module as a script, allowing you to execute tests.
 - `discover`: This is a command-line option that tells unittest to discover and run tests in a specified directory.
 - `-s tests`: This specifies the directory where unittest should start discovering tests. In this case, it assumes that test files are located in a directory named "tests".
-
-The test files should be named with the prefix `test_` and placed in the "tests" directory.
