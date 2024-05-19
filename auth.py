@@ -37,6 +37,19 @@ def signup():
         return redirect(url_for('main'))
     return render_template('signup.html')
 
+@auth_bp.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        user = User.query.filter_by(username=username).first()
+        if user and user.is_admin and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('admin.upload_book'))
+        else:
+            return render_template('admin_login.html', error='Invalid username or password')
+    return render_template('admin_login.html')
+
 @auth_bp.route('/logout')
 @login_required
 def logout():

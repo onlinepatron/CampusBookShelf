@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Book{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Upload Book</h1>
+    <form action="{{ url_for('admin.upload_book') }}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="synopsis">Synopsis:</label>
+            <textarea id="synopsis" name="synopsis" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Book Image:</label>
+            <input type="file" id="image" name="image" class="form-control-file">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</div>
+{% endblock %}
