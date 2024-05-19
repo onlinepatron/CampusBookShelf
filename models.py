@@ -2,6 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from extensions import db, login_manager
 from datetime import datetime
+from sqlalchemy import func
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -38,13 +39,18 @@ class Book(db.Model):
             "image_url": self.image_url
         }
 
+    @property
+    def average_rating(self):
+        if self.reviews:
+            return round(sum(review.rating for review in self.reviews) / len(self.reviews), 2)
+        return 0
+
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     text = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
-
     user = db.relationship('User', back_populates='reviews')
     book = db.relationship('Book', back_populates='reviews')
 
@@ -61,7 +67,6 @@ class Comment(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     text = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-
     user = db.relationship('User', back_populates='comments')
     book = db.relationship('Book', back_populates='comments')
 

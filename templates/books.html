@@ -16,9 +16,28 @@
 
     <h1>Books</h1>
     <p style="text-align: center;">View our CampusBookShelf!</p>
+
     {% if current_user.is_authenticated and current_user.is_admin %}
         <a href="{{ url_for('admin.upload_book') }}" class="SmallButton">Upload Book</a>
     {% endif %}
+
+    <div class="mb-3">
+        <form action="{{ url_for('book.get_books') }}" method="GET">
+            <div class="form-group">
+                <label for="sort_by">Sort By:</label>
+                <select class="form-control" id="sort_by" name="sort_by">
+                    <option value="title">Title</option>
+                    <option value="rating">Rating (Highest to Lowest)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre:</label>
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
     <div class="row">
         {% for book in books %}
             <div class="col-md-4">

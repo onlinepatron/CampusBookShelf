@@ -7,7 +7,17 @@ book_bp = Blueprint('book', __name__)
 
 @book_bp.route('/books')
 def get_books():
-    books = Book.query.all()
+    sort_by = request.args.get('sort_by', 'title')
+    genre = request.args.get('genre', '')
+
+    if sort_by == 'rating':
+        books = sorted(Book.query.all(), key=lambda book: book.average_rating, reverse=True)
+    else:
+        books = Book.query.order_by(Book.title).all()
+
+    if genre:
+        books = [book for book in books if genre.lower() in book.genre.lower()]
+
     return render_template('books.html', books=books)
 
 @book_bp.route('/book/<int:book_id>')
