@@ -5,20 +5,25 @@ from flask_login import login_required, current_user
 
 book_bp = Blueprint('book', __name__)
 
-@book_bp.route('/books')
+@book_bp.route('/books', methods=['GET'])
 def get_books():
     sort_by = request.args.get('sort_by', 'title')
     genre = request.args.get('genre', '')
 
-    if sort_by == 'rating':
-        books = sorted(Book.query.all(), key=lambda book: book.average_rating, reverse=True)
-    else:
-        books = Book.query.order_by(Book.title).all()
+    query = Book.query
 
     if genre:
-        books = [book for book in books if genre.lower() in book.genre.lower()]
+        query = query.filter(Book.genre.ilike(f'%{genre}%'))
+
+    if sort_by == 'rating':
+        query = query.outerjoin(Review).group_by(Book.id).order_by(db.func.avg(Review.rating).desc())
+    else:
+        query = query.order_by(Book.title)
+
+    books = query.all()
 
     return render_template('books.html', books=books)
+
 
 @book_bp.route('/book/<int:book_id>')
 def get_book(book_id):
@@ -26,7 +31,6 @@ def get_book(book_id):
     return render_template('book.html', book=book)
 
 @book_bp.route('/update_book/<int:book_id>', methods=['GET', 'POST'])
-@login_required
 def update_book(book_id):
     book = db.session.get(Book, book_id)
     if request.method == 'POST':
@@ -41,7 +45,6 @@ def update_book(book_id):
     return render_template('update_book.html', book=book)
 
 @book_bp.route('/delete_book/<int:book_id>', methods=['POST'])
-@login_required
 def delete_book(book_id):
     book = db.session.get(Book, book_id)
     db.session.delete(book)
@@ -71,7 +74,7 @@ def create_request():
         flash('Your book request has been successfully submitted!', 'success')
         return redirect(url_for('main'))  # Redirect to the main page
 
-    return render_template('createRequest.html')     
+    return render_template('createRequest.html')       
 
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
@@ -95,8 +98,8 @@ def rate_books():
 @book_bp.route('/findRequests')
 @login_required
 def find_requests_page():
-    books = BookRequest.query.all()
-    return render_template('findRequests.html', books=books)
+    book_requests = BookRequest.query.all()
+    return render_template('findRequests.html', book_requests=book_requests)
 
 @book_bp.route('/api/findRequests', methods=['GET'])
 @login_required
@@ -114,25 +117,11 @@ def api_find_requests():
     result = [request.serialize() for request in requests]
     return jsonify(result)
 
-@book_bp.route('/book_request/<int:request_id>/comment', methods=['POST'])
+@book_bp.route('/book_request/<int:book_request_id>/comment', methods=['POST'])
 @login_required
-def add_book_request_comment(request_id):
+def add_book_request_comment(book_request_id):
     text = request.form.get('text')
-    if not text:
-        return jsonify({'error': 'Comment text is required'}), 400
-    book_request = BookRequest.query.get(request_id)
-    if not book_request:
-        return jsonify({'error': 'Book request not found'}), 404
-    comment = Comment(user=current_user, book_request=book_request, text=text)
+    comment = Comment(user_id=current_user.id, book_request_id=book_request_id, text=text)
     db.session.add(comment)
     db.session.commit()
-    comment_data = {
-        'id': comment.id,
-        'user': {
-            'id': comment.user.id,
-            'username': comment.user.username
-        },
-        'text': comment.text
-    }
-    return jsonify({'message': 'Comment added successfully', 'comment': comment_data}), 201
-
+    return jsonify({"message": "Comment added successfully", "comment": comment.serialize()})
