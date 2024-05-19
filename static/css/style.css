@@ -435,3 +435,10 @@ img.displaySlide{
     color: #4b9149;
     font-weight: bold;
 }
+
+.book-cover {
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+    width: 500px;
+  }
