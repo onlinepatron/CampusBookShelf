@@ -156,6 +156,10 @@ nav ul li a {
     color: #4b9149;
 }
 
+.formText {
+    text-align: center;
+}
+
 form {
     max-width: 400px;
     margin: 20px auto;
@@ -174,7 +178,7 @@ form input, form textarea, form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #4b9149;
+    border: 1px solid rgb(174, 175, 175);
     border-radius: 5px;
 }
 
@@ -192,6 +196,23 @@ form .btn:hover {
     background-color: #a4aca3;
 } 
 
+/* FindRequests form */
+
+.formSearchTitle {
+    color: #ffffff;
+    font-size: medium;
+}
+
+.formRequestTitle {
+    text-align: left;
+    font-size: xx-large;
+}
+
+
+.thead-custom-green{
+    background-color: #4b9149;
+    color: white;
+}
 
 /* Carousel index.html css */
 .ReccomendedBooksCarousel{
