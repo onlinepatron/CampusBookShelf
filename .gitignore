@@ -124,4 +124,7 @@ venv.bak/
 !/CampusBookShelf/tests/test_*.py
 
 # Ignore the migrations folder and its contents
-/CampusBookShelf/migrations/
+migrations/
+
+# Ignore the database file
+instance/campusbookshelf.db
