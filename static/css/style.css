@@ -362,6 +362,27 @@ img.displaySlide{
 
 }
 
+/* browse books  */
+
+#browsebooksform {
+    max-height: 400px;
+    overflow-y: auto;
+
+}
+
+.card-img {
+    width: 180px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto; 
+}
+
+.BooksImage {
+    text-align: center; 
+    padding-top: 10px; 
+}
 /* Buttons */
 
 .SmallButton {
