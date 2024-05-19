@@ -3,51 +3,70 @@
 {% block title %}My Profile{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>My Profile</h1>
+<div class="container my-profile">
+    <h1 class="profile-title">My Profile</h1>
 
-    <h2>Reviews</h2>
-    {% if reviews %}
-        {% for review in reviews %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ review.book.title }}</h5>
-                    <p class="card-text">Rating: {{ review.rating }}</p>
-                    <p class="card-text">{{ review.text }}</p>
-                </div>
+    <div class="profile-section">
+        <h2 class="section-title">Reviews</h2>
+        {% if reviews %}
+            <div class="card-deck">
+                {% for review in reviews %}
+                    <div class="card review-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ review.book.title }}</h5>
+                            <p class="card-text">
+                                {% for i in range(review.rating) %}
+                                    <i class="fas fa-star"></i>
+                                {% endfor %}
+                                {% for i in range(5 - review.rating) %}
+                                    <i class="far fa-star"></i>
+                                {% endfor %}
+                            </p>
+                            <p class="card-text">{{ review.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No reviews found.</p>
-    {% endif %}
+        {% else %}
+            <p class="no-data">No reviews found.</p>
+        {% endif %}
+    </div>
 
-    <h2>Book Requests</h2>
-    {% if book_requests %}
-        {% for book_request in book_requests %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ book_request.title }}</h5>
-                    <p class="card-text">Author: {{ book_request.author }}</p>
-                    <p class="card-text">Genre: {{ book_request.genre }}</p>
-                </div>
+    <div class="profile-section">
+        <h2 class="section-title">Book Requests</h2>
+        {% if book_requests %}
+            <div class="card-deck">
+                {% for book_request in book_requests %}
+                    <div class="card book-request-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book_request.title }}</h5>
+                            <p class="card-text">Author: {{ book_request.author }}</p>
+                            <p class="card-text">Genre: {{ book_request.genre }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No book requests found.</p>
-    {% endif %}
+        {% else %}
+            <p class="no-data">No book requests found.</p>
+        {% endif %}
+    </div>
 
-    <h2>Comments</h2>
-    {% if comments %}
-        {% for comment in comments %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">{{ comment.book_request.title }}</h5>
-                    <p class="card-text">{{ comment.text }}</p>
-                </div>
+    <div class="profile-section">
+        <h2 class="section-title">Comments</h2>
+        {% if comments %}
+            <div class="card-deck">
+                {% for comment in comments %}
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ comment.book_request.title }}</h5>
+                            <p class="card-text">{{ comment.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    {% else %}
-        <p>No comments found.</p>
-    {% endif %}
+        {% else %}
+            <p class="no-data">No comments found.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
