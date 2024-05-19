@@ -26,6 +26,14 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ book.title }}</h5>
                         <p class="card-text">{{ book.synopsis }}</p>
+                        {% if book.reviews %}
+                            <p class="card-text"><strong>Reviews:</strong></p>
+                            {% for review in book.reviews %}
+                                <p>{{ review.rating_description() }}: {{ review.text }}</p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="card-text">No reviews yet.</p>
+                        {% endif %}
                         <a href="{{ url_for('book.get_book', book_id=book.id) }}" class="btn btn-primary">Details</a>
                     </div>
                 </div>
