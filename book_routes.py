@@ -53,6 +53,7 @@ def delete_book(book_id):
     return redirect(url_for('book.get_books'))
 
 @book_bp.route('/createRequest', methods=['GET', 'POST'])
+@login_required
 def create_request():
     title = request.args.get('title')
     author = request.args.get('author')
@@ -95,12 +96,14 @@ def rate_books():
     return render_template('rateBooks.html', books=books)
 
 @book_bp.route('/findRequests')
+@login_required
 def find_requests_page():
     books = BookRequest.query.all()
     return render_template('findRequests.html', books=books)
 
 
 @book_bp.route('/api/findRequests', methods=['GET'])
+@login_required
 def api_find_requests():
     genre = request.args.get('genre')
     title = request.args.get('title')
