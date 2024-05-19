@@ -18,7 +18,9 @@
     <p style="text-align: center;">View our CampusBookShelf!</p>
 
     {% if current_user.is_authenticated and current_user.is_admin %}
+    <div class="BooksBtn">
         <a href="{{ url_for('admin.upload_book') }}" class="SmallButton">Upload Book</a>
+    </div>
     {% endif %}
 
     <div class="mb-3">
@@ -41,16 +43,18 @@
     <div class="row">
         {% for book in books %}
             <div class="col-md-4">
-                <div class="card mb-4">
+                <div class="card mb-4" id="ratedBooks">
                     <div class="BooksImage">
                         <img class="card-img" src="{{ book.image_url }}" alt="{{ book.title }}">
                     </div>
                     <div class="card-body" id="browsebooksform">
-                        <h5 class="card-title">{{ book.title }}</h5>
+                        <h5 class="card-title" style="color: #4b9149; font-weight: bolder;">{{ book.title }}</h5>
                         <p class="card-text">{{ book.synopsis }}</p>
+                        <div class="BooksBtn">
                         <a href="{{ url_for('book.get_book', book_id=book.id) }}" class="SmallButton">Details</a>
                     </div>
-                    <div class="card-footer">
+                    </div>
+                    <div class="card-footer" id="reviewFooter">
                         <h6>Reviews:</h6>
                         <ul>
                             {% for review in book.reviews %}

@@ -19,6 +19,11 @@ h2 {
     font-weight: bold;
 }
 
+h6{
+   font-style: italic;
+   
+}
+
 /* nav bar */
 
 #logoHome{
@@ -214,6 +219,11 @@ form .btn:hover {
     color: white;
 }
 
+
+#ratedBooks:hover {
+    transform: scale(1.03); 
+}
+
 /* Carousel index.html css */
 .ReccomendedBooksCarousel{
     position: relative;
@@ -285,6 +295,11 @@ img.displaySlide{
         flex-direction: column;
         margin-bottom: 20px; 
 
+      }
+
+      #aboutUsPage .column:hover{
+        transform: scale(1.05);  
+    
       }
 
       #aboutUsPage .card {
@@ -402,4 +417,21 @@ img.displaySlide{
 .SmallButton:hover {
     background: #a4aca3;
 
+}
+
+/* Book/Books */
+.BooksBtn {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+#reviewFooter {
+    background-color: #75a773;
+}
+
+
+.commentUsername {
+    color: #4b9149;
+    font-weight: bold;
 }
