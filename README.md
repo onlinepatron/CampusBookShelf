@@ -1,64 +1,98 @@
-# CITS3403 Project 
-a book store/ review, that will get us a hd.
+# CITS3403 Project
 
-This project is a bookstore and review application developed as part of our coursework for CITS3401. 
-The application aims to provide users with an application for discovering, purchasing, and reviewing books. 
-It incorporates features such as user authentication, book browsing, reviews, and recommendations to enhance user 
-engagement and satisfaction.
+A book store/review application that will get us an HD.
 
-# Purpose 
-a book store/ review, that will get us a hd.
+This project is a bookstore and review application developed as part of our coursework for CITS3401. The application aims to provide users with an application for discovering, purchasing, and reviewing books. It incorporates features such as user authentication, book browsing, reviews, and recommendations to enhance user engagement and satisfaction.
 
-Description
+## Purpose
 
-This project is a bookstore and review application developed as part of our coursework for CITS3401. 
-The application aims to provide users with an application for discovering, purchasing, and reviewing books. 
-It incorporates features such as user authentication, book browsing, reviews, and recommendations to enhance user 
-engagement and satisfaction.
+The purpose of this project is to create a bookstore and review application that will earn us an HD grade. The application provides the following features:
 
-User Authentication:
-Users can sign up and log in securely to access the application's features.
-Password hashing for enhanced security.
+**User Authentication:**
+- Users can sign up and log in securely to access the application's features.
+- Password hashing for enhanced security.
 
-Book Catalog:
-Comprehensive catalog of books with detailed information including title, author, genre, synopsis, picture etc.
-Ability to search for books based on genre.
+**Book Catalog:**
+- Comprehensive catalog of books with detailed information including title, author, genre, synopsis, picture, etc.
+- Ability to search for books based on genre.
 
-Book Reviews:
-Users can rate and review books they have read. Once they have signed in.
-Option to sort books by highest rated to lowest rated.
+**Book Reviews:**
+- Users can rate and review books they have read once they have signed in.
+- Option to sort books by highest rated to lowest rated.
+- Users can easily discover and explore new releases.
 
-Book searching:
-Display of the latest additions to the bookstore's collection.
-Users can easily discover and explore new releases.
+**About us:**
+- Display of the four members who created the page, including their favorite books and a little information about each member.
 
-About us:
-Display of the four members who created the page. Faviorite book and a little information.
+**User Profile:**
+- Users have personalized profiles where they can view their activity, reviews, and favorites.
 
-User Profile:
-Users have personalized profiles where they can view their activity, reviews, favorites.
+## Group Members
 
-# Group Members 
-| UWA ID  | Name | Github User |
-| ------------- | ------------- |------------- |
-| 23376234 | Myla Do   | Mylaaado |
-| 22915304 | James Rimmer | Jimmy141619 |
-| 23364195 | Camilo Lima Castillo | Onlinepatron |
-| 22980141 | William Lodge | Log1112 |
+| UWA ID   | Name                 | Github User |
+|----------|---------------------|-------------|
+| 23376234 | Myla Do             | Mylaaado    |
+| 22915304 | James Rimmer        | Jimmy141619 |
+| 23364195 | Camilo Lima Castillo| Onlinepatron|
+| 22980141 | William Lodge       | Log1112     |
 
-# Architecture 
-A brief summary of the architecture of the application
+## Architecture
 
-# Launching the Application
-Instructions on how to launch the application 
+The application follows a client-server architecture using Flask as the backend framework and SQLAlchemy as the ORM for database management. The frontend is built using HTML, CSS, and JavaScript, with the help of Bootstrap for responsive design.
 
-# Running the Application 
-Instructions for how to run the tests for the application 
+## Setting up the Python Environment
 
-# Run Test Files
+1. Create a virtual environment:
+   ```
+   python3 -m venv venv
+   ```
+
+2. Activate the virtual environment:
+   - For Unix/Linux:
+     ```
+     source venv/bin/activate
+     ```
+   - For Windows:
+     ```
+     venv\Scripts\activate
+     ```
+
+3. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+## Launching the Application
+
+1. Initialize the database:
+   ```
+   flask db init
+   ```
+
+2. Apply the database migrations:
+   ```
+   flask db migrate
+   flask db upgrade
+   ```
+
+3. Run the application:
+   ```
+   flask run
+   ```
+
+The application will be accessible at `http://localhost:5000`.
+
+## Running the Tests
+
+To run the tests for the application, use the following command:
+
+```
+python -m unittest discover tests
+```
 
 This command does the following:
+- `python -m unittest`: This runs the unittest module as a script, allowing you to execute tests.
+- `discover`: This is a command-line option that tells unittest to discover and run tests in a specified directory.
+- `-s tests`: This specifies the directory where unittest should start discovering tests. In this case, it assumes that test files are located in a directory named "tests".
 
-python -m unittest: This runs the unittest module as a script, allowing you to execute tests.
-discover: This is a command-line option that tells unittest to discover and run tests in a specified directory.
--s tests: This specifies the directory where unittest should start discovering tests. In this case, it assumes that test files are located in a directory named "tests".
+The test files should be named with the prefix `test_` and placed in the "tests" directory.
