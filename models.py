@@ -48,6 +48,10 @@ class Review(db.Model):
     user = db.relationship('User', back_populates='reviews')
     book = db.relationship('Book', back_populates='reviews')
 
+    def rating_description(self):
+        descriptions = {1: 'Poor', 2: 'Fair', 3: 'Good', 4: 'Very Good', 5: 'Excellent'}
+        return descriptions.get(self.rating, 'Unknown')
+
 User.reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
 Book.reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
 
