@@ -52,6 +52,7 @@ $(document).ready(function() {
         resultsBody.empty();
         if (response && response.length) {
           response.forEach(function(request) {
+            const commentsHtml = request.comments ? request.comments.map(comment => `<p>${comment.user}: ${comment.text}</p>`).join('') : '';
             const row = `
               <tr>
                 <td>${request.title}</td>
@@ -59,12 +60,12 @@ $(document).ready(function() {
                 <td>${request.genre}</td>
                 <td>${request.message}</td>
                 <td>
-                  <div class="comments">
+                  <div class="comments" id="comments-${request.id}">
                     <h6>Comments:</h6>
-                    ${request.comments ? request.comments.map(comment => `<p>${comment.user}: ${comment.text}</p>`).join('') : ''}
+                    ${commentsHtml}
                   </div>
                   <div class="comment-box">
-                    <form action="/book/${request.id}/comment" method="post">
+                    <form class="comment-form" data-request-id="${request.id}">
                       <textarea name="text" required></textarea>
                       <button type="submit" class="btn btn-primary">Add Comment</button>
                     </form>
@@ -89,6 +90,27 @@ $(document).ready(function() {
     e.preventDefault();
     const formData = $(this).serialize();
     loadRequests(formData);
+  });
+
+  $(document).on('submit', '.comment-form', function(e) {
+    e.preventDefault();
+    const form = $(this);
+    const requestId = form.data('request-id');
+    const formData = form.serialize();
+    $.ajax({
+      url: `/book_request/${requestId}/comment`,
+      type: 'POST',
+      data: formData,
+      success: function(response) {
+        if (response.comment) {
+          const commentHtml = `<p>${response.comment.user}: ${response.comment.text}</p>`;
+          $(`#comments-${requestId}`).append(commentHtml);
+        }
+      },
+      error: function(xhr, status, error) {
+        alert(`Error adding comment: ${xhr.responseJSON.error}`);
+      }
+    });
   });
 
   loadRequests();
