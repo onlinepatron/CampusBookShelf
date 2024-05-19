@@ -61,18 +61,6 @@ class Review(db.Model):
 User.reviews = db.relationship('Review', back_populates='user', cascade='all, delete-orphan')
 Book.reviews = db.relationship('Review', back_populates='book', cascade='all, delete-orphan')
 
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
-    text = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-    user = db.relationship('User', back_populates='comments')
-    book = db.relationship('Book', back_populates='comments')
-
-User.comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
-Book.comments = db.relationship('Comment', back_populates='book', cascade='all, delete-orphan')
-
 class BookRequest(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
@@ -81,6 +69,7 @@ class BookRequest(db.Model):
     message = db.Column(db.Text, nullable=True)
     book_type = db.Column(db.String(50), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    comments = db.relationship('Comment', back_populates='book_request', lazy='dynamic')
 
     def serialize(self):
         return {
@@ -90,5 +79,27 @@ class BookRequest(db.Model):
             "genre": self.genre,
             "message": self.message,
             "book_type": self.book_type,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "comments": [comment.serialize() for comment in self.comments]
         }
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    book_request_id = db.Column(db.Integer, db.ForeignKey('book_request.id'), nullable=False)
+    text = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    user = db.relationship('User', back_populates='comments')
+    book_request = db.relationship('BookRequest', back_populates='comments')
+    
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "book_request_id": self.book_request_id,
+            "text": self.text,
+            "timestamp": self.timestamp
+        }
+
+User.comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
+BookRequest.comments = db.relationship('Comment', back_populates='book_request', cascade='all, delete-orphan')

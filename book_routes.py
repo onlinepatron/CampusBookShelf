@@ -71,7 +71,7 @@ def create_request():
         flash('Your book request has been successfully submitted!', 'success')
         return redirect(url_for('main'))  # Redirect to the main page
 
-    return render_template('createRequest.html')       
+    return render_template('createRequest.html')     
 
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
@@ -120,11 +120,18 @@ def add_book_request_comment(request_id):
     text = request.form.get('text')
     if not text:
         return jsonify({'error': 'Comment text is required'}), 400
-    comment = Comment(user_id=current_user.id, book_id=request_id, text=text)
+    book_request = BookRequest.query.get(request_id)
+    if not book_request:
+        return jsonify({'error': 'Book request not found'}), 404
+    comment = Comment(user=current_user, book_request=book_request, text=text)
     db.session.add(comment)
     db.session.commit()
     comment_data = {
-        'user': current_user.username,
+        'id': comment.id,
+        'user': {
+            'id': comment.user.id,
+            'username': comment.user.username
+        },
         'text': comment.text
     }
     return jsonify({'message': 'Comment added successfully', 'comment': comment_data}), 201

@@ -4,26 +4,23 @@
 
 {% block content %}
 <div class="container mt-4">
-
+  <h2>Find Book Requests</h2>
   
   <form id="searchForm" class="mb-3">
-    <h2 class="formTitle">View Book Requests</h2>
-    <p class="formText">Share your spare books to someone looking for a copy</p>
-    <div class="form-group">
-      <label for="title">Book:</label>
-      <input type="text" class="form-control" id="title" name="title">
-    </div>
     <div class="form-group">
       <label for="genre">Genre:</label>
       <input type="text" class="form-control" id="genre" name="genre">
     </div>
-    <button type="submit" class="btn btn-primary">Filter Requests</button>
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" class="form-control" id="title" name="title">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
   </form>
 
   <div class="table-responsive">
-    <h1 class="formRequestTitle">Requested Books</h1>
     <table id="resultsTable" class="table mt-4">
-      <thead class="thead-custom-green">
+      <thead class="thead-dark">
         <tr>
           <th>Title</th>
           <th>Author</th>
@@ -33,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Results will be appended here by JavaScript -->
+        <!-- Search results will be inserted here -->
       </tbody>
     </table>
   </div>
@@ -55,7 +52,6 @@ $(document).ready(function() {
         resultsBody.empty();
         if (response && response.length) {
           response.forEach(function(request) {
-            const commentsHtml = request.comments ? request.comments.map(comment => `<p>${comment.user}: ${comment.text}</p>`).join('') : '';
             const row = `
               <tr>
                 <td>${request.title}</td>
@@ -63,11 +59,12 @@ $(document).ready(function() {
                 <td>${request.genre}</td>
                 <td>${request.message}</td>
                 <td>
-                  <div class="comments" id="comments-${request.id}">
-                    ${commentsHtml}
+                  <div class="comments">
+                    <h6>Comments:</h6>
+                    ${request.comments.map(comment => `<p>${comment.user_id}: ${comment.text}</p>`).join('')}
                   </div>
                   <div class="comment-box">
-                    <form class="comment-form" data-request-id="${request.id}">
+                    <form action="/book/${request.id}/comment" method="post">
                       <textarea name="text" required></textarea>
                       <button type="submit" class="btn btn-primary">Add Comment</button>
                     </form>
@@ -78,7 +75,7 @@ $(document).ready(function() {
             resultsBody.append(row);
           });
         } else {
-          resultsBody.append('<tr><td colspan="5">No book requests found.</td></tr>');
+          resultsBody.append('<tr><td colspan="5">No requests found.</td></tr>');
         }
       },
       error: function() {
@@ -88,34 +85,14 @@ $(document).ready(function() {
     });
   }
 
+  // Load all requests initially
+  loadRequests();
+
   $('#searchForm').on('submit', function(e) {
     e.preventDefault();
     const formData = $(this).serialize();
     loadRequests(formData);
   });
-
-  $(document).on('submit', '.comment-form', function(e) {
-    e.preventDefault();
-    const form = $(this);
-    const requestId = form.data('request-id');
-    const formData = form.serialize();
-    $.ajax({
-      url: `/book_request/${requestId}/comment`,
-      type: 'POST',
-      data: formData,
-      success: function(response) {
-        if (response.comment) {
-          const commentHtml = `<p>${response.comment.user}: ${response.comment.text}</p>`;
-          $(`#comments-${requestId}`).append(commentHtml);
-        }
-      },
-      error: function(xhr, status, error) {
-        alert(`Error adding comment: ${xhr.responseJSON.error}`);
-      }
-    });
-  });
-
-  loadRequests();
 });
 </script>
 {% endblock %}
