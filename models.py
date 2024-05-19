@@ -62,3 +62,23 @@ class Comment(db.Model):
 
 User.comments = db.relationship('Comment', back_populates='user', cascade='all, delete-orphan')
 Book.comments = db.relationship('Comment', back_populates='book', cascade='all, delete-orphan')
+
+class BookRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(150), nullable=False)
+    author = db.Column(db.String(150), nullable=False)
+    genre = db.Column(db.String(50), nullable=False)
+    message = db.Column(db.Text, nullable=True)
+    book_type = db.Column(db.String(50), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "author": self.author,
+            "genre": self.genre,
+            "message": self.message,
+            "book_type": self.book_type,
+            "created_at": self.created_at
+        }

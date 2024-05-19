@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash
 from app import db
-from models import Book, Review, Comment
+from models import Book, BookRequest, Review, Comment
 from flask_login import login_required, current_user
 
 book_bp = Blueprint('book', __name__)
@@ -66,14 +66,14 @@ def create_request():
         message = request.form.get('message', '')
         book_type = request.form.get('type', 'PDF')
 
-        new_book = Book(title=title, author=author, genre=genre, synopsis=message)
-        db.session.add(new_book)
+        new_request = BookRequest(title=title, author=author, genre=genre, message=message, book_type=book_type)
+        db.session.add(new_request)
         db.session.commit()
 
         flash('Your book request has been successfully submitted!', 'success')
-        return redirect(url_for('main'))  # Redirect to the home page
+        return redirect(url_for('main'))  # Redirect to the main page
 
-    return render_template('createRequest.html')    
+    return render_template('createRequest.html')       
 
 @book_bp.route('/rate-books', methods=['GET', 'POST'])
 @login_required
@@ -96,7 +96,7 @@ def rate_books():
 
 @book_bp.route('/findRequests')
 def find_requests_page():
-    books = Book.query.all()
+    books = BookRequest.query.all()
     return render_template('findRequests.html', books=books)
 
 
@@ -104,18 +104,15 @@ def find_requests_page():
 def api_find_requests():
     genre = request.args.get('genre')
     title = request.args.get('title')
-    query = Book.query
+    query = BookRequest.query
 
     if genre:
-        query = query.filter(Book.genre.ilike(f"%{genre}%"))
+        query = query.filter(BookRequest.genre.ilike(f"%{genre}%"))
     if title:
-        query = query.filter(Book.title.ilike(f"%{title}%"))
+        query = query.filter(BookRequest.title.ilike(f"%{title}%"))
 
-    books = query.all()
-    result = [book.serialize() for book in books]
-    for book in result:
-        comments = Comment.query.filter_by(book_id=book['id']).all()
-        book['comments'] = [{'id': comment.id, 'user': comment.user.username, 'text': comment.text} for comment in comments]
+    requests = query.all()
+    result = [request.serialize() for request in requests]
     return jsonify(result)
 
 @book_bp.route('/book/<int:book_id>/comment', methods=['POST'])
