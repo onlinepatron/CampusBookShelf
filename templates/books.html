@@ -58,7 +58,15 @@
                         <h6>Reviews:</h6>
                         <ul>
                             {% for review in book.reviews %}
-                                <li>{{ review.text }} - {{ review.rating_description }}</li>
+                                <li>
+                                    {% for i in range(review.rating) %}
+                                        <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    {% for i in range(5 - review.rating) %}
+                                        <i class="far fa-star"></i>
+                                    {% endfor %}
+                                    {{ review.text }}
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

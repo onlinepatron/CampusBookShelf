@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>{% block title %}Home{% endblock %}</title>
 </head>
@@ -29,6 +30,7 @@
                     {% if current_user.is_admin %}
                         <a class="nav-item nav-link" id="uploadBook" href="{{ url_for('admin.upload_book') }}">Upload Book</a>
                     {% endif %}
+                    <a class="nav-item nav-link" id="myProfile" href="{{ url_for('profile.my_profile') }}">My Profile</a>
                     <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
                 {% else %}
                     <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>

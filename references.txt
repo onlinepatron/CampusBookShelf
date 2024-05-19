@@ -46,3 +46,5 @@ Andy Weir. (2021). "Project Hail Mary" by Andy Weir. [Book Cover]. Amazon. https
 Matt Haig. (2020). "The Midnight Library" by Matt Haig. [Book Cover]. Amazon. https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1602190253i/52578297.jpg
 
 Kristin Hannah. (2021). "The Four Winds" by Kristin Hannah. [Book Cover]. Amazon. https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1594925043i/53138081.jpg
+
+https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.cs

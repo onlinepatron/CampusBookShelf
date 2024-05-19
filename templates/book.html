@@ -33,7 +33,14 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{ review.user.username }}</h5>
-                    <p class="card-text">Rating: {{ review.rating }}</p>
+                    <p class="card-text">
+                        {% for i in range(review.rating) %}
+                            <i class="fas fa-star"></i>
+                        {% endfor %}
+                        {% for i in range(5 - review.rating) %}
+                            <i class="far fa-star"></i>
+                        {% endfor %}
+                    </p>
                     <p class="card-text">{{ review.text }}</p>
                 </div>
             </div>
