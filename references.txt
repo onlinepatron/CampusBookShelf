@@ -27,15 +27,15 @@ Greg Sullavan. (2022). [Image]. The Guardian. https://www.theguardian.com/enviro
 
 Meerkat. (2024). [Image].Wikipedia. https://simple.wikipedia.org/wiki/Meerkat
 
-Bootstrap Team. (2024). Navbar · Bootstrap v5.3. Retrieved from Bootstrap Documentation.
+Bootstrap Team. (2024). Navbar · Bootstrap v5.3. https://getbootstrap.com/docs/5.3/components/navbar/
 
-Bootstrap Team. (2024). Form · Bootstrap v5.3. Retrieved from Bootstrap Documentation.
+Bootstrap Team. (2024). Form · Bootstrap v5.3. Retrieved from Bootstrap Documentation. https://getbootstrap.com/docs/5.3/components/form-control/
 
-GeeksforGeeks. (2024). HTML Login Form. Retrieved from GeeksforGeeks.
+GeeksforGeeks. (2024). HTML Login Form. Retrieved from GeeksforGeeks. https://www.geeksforgeeks.org/html-login-form/
 
-Corey Schafer. (2024). Python Programming Tutorials. YouTube Playlist. Retrieved from YouTube.
+Corey Schafer. (2024). Python Programming Tutorials. YouTube Playlist. https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH
 
-Programming with Mosh. (2024). Flask Full Course. YouTube Playlist. Retrieved from YouTube.
+Programming with Mosh. (2024). Flask Full Course. YouTube Playlist. https://www.youtube.com/playlist?list=PLCC34OHNcOtolz2Vd9ZSeSXWc8Bq23yEz
 
 V.E. Schwab. (2020). "The Invisible Life of Addie LaRue" by V.E. Schwab. [Book Cover]. Amazon. https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1584633432i/50623864.jpg
 
@@ -47,4 +47,4 @@ Matt Haig. (2020). "The Midnight Library" by Matt Haig. [Book Cover]. Amazon. ht
 
 Kristin Hannah. (2021). "The Four Winds" by Kristin Hannah. [Book Cover]. Amazon. https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1594925043i/53138081.jpg
 
-https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.cs
+Font Awesome. (n.d.). Font Awesome - The iconic font and CSS toolkit. https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.cs
